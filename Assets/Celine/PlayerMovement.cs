@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // If player is grounded, player can jump
-        if (grounded && (Input.GetAxis("Jump") >= 0.01))
+        if (grounded && (Input.GetAxis("A_Button") >= 0.01))
         {
             rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpForce);
             tempMove = moveHorizontal;
