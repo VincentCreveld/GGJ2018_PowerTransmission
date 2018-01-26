@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public float speed = 6;
-    public float jumpForce = 700;
+    public float jumpForce = 500;
 
     public Transform groundCheck;
     public LayerMask whatIsGround;
@@ -13,7 +13,8 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody2D rigidBody2D;
     public bool grounded = true;
     private float groundRadius = 0.2f;
-    private float move;
+    private float moveHorizontal;
+    private float tempMove;
 
     void Start ()
     {
@@ -32,15 +33,35 @@ public class PlayerManager : MonoBehaviour
             grounded = false;
         }
 
-        move = (Input.GetAxis("Horizontal"));
-        rigidBody2D.velocity = new Vector2(move * speed, rigidBody2D.velocity.y);
-	}
+        moveHorizontal = (Input.GetAxis("Horizontal"));
+
+        if (grounded)
+        {
+            rigidBody2D.velocity = new Vector2(moveHorizontal * speed, rigidBody2D.velocity.y);
+        }
+        else
+        {
+            // If player turns mid-jump
+            if (tempMove > 0.01 && moveHorizontal < -0.01)
+            {
+                rigidBody2D.velocity = new Vector2(moveHorizontal * speed * 0.3f, rigidBody2D.velocity.y);
+            }
+            else if (tempMove < -0.01 && moveHorizontal > 0.01)
+            {
+                rigidBody2D.velocity = new Vector2(moveHorizontal * speed * 0.3f, rigidBody2D.velocity.y);
+            }
+        }
+
+        // If player is grounded, player can jump
+        if (grounded && (Input.GetAxis("Jump") >= 0.01))
+        {
+            rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpForce);
+            tempMove = moveHorizontal;
+        }
+    }
 
     private void Update()
     {
-        // If player is grounded, player can jump
-        if (grounded && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))) {
-            rigidBody2D.AddForce(new Vector2(0, jumpForce));
-        }
+        
     }
 }
