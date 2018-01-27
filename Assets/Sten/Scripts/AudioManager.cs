@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum musicTrack { startScreenSound = 0, level1Sound, level2Sound, level3Sound, level4Sound, level5Sound, gameOverSound, menuSound };
 public enum environmentalSound { };
-public enum uiSounds { openMenu = 0, callSwitch, textOpen, textCloses };
+public enum uiSounds { cameraSwitch = 0, openMenu, callSwitch, textOpen, textCloses,  };
 public enum interactionSounds {pickupSound=0,woodDropSound, stoneDropSound,glassDropSound,steelDropSound};
 
 public class AudioManager : MonoBehaviour {
