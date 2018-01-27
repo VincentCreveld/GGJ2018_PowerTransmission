@@ -61,6 +61,7 @@ public class PlayerManager : MonoBehaviour {
 	private float moveHorizontal;
 	private float tempMove;
 	private bool climbable = false;
+    private bool facingRight = true;
 	#endregion
 
 	public void Initialize() {
@@ -123,6 +124,26 @@ public class PlayerManager : MonoBehaviour {
 				rigidBody2D.velocity = new Vector2(moveHorizontal * speed * 0.3f, rigidBody2D.velocity.y);
 			}
 		}
+
+
+        if (moveHorizontal > 0.19)
+        {
+            facingRight = true;
+        }
+        else if (moveHorizontal < -0.19)
+        {
+            facingRight = false;
+        }
+
+        if (facingRight)
+        {
+            graphicsSlot.localScale = new Vector3(1, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+        }
+        else if (!facingRight)
+        {
+            graphicsSlot.localScale = new Vector3(-1, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+        }
+
 
 		// CLIMBING
 		moveVertical = (Input.GetAxis(connectedController.GetVertical()));
