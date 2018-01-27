@@ -35,7 +35,6 @@ public class SwapManager : MonoBehaviour {
 
 	private void Start() {
 		SetupPlayerManagers();
-		Debug.Log(LayerMask.NameToLayer("Default"));
 	}
 
 
@@ -56,7 +55,7 @@ public class SwapManager : MonoBehaviour {
 		player1.a_isEnabled = true;
 		player1.x_isEnabled = true;
 		player1.Initialize();
-		p1IsHolding = true;
+		p1IsHolding = false;
 		//player1.whatIsGround = gameObject.layer;
 
 		player2.A_ButtonSwap += A_Swap;
@@ -101,6 +100,7 @@ public class SwapManager : MonoBehaviour {
 
 	public void DropWeapon() {
 		Debug.Log("Reached drop");
+		pickedUpObj.GetComponent<Rigidbody2D>().isKinematic = false;
 		pickedUpObj.transform.parent = null;
 		pickedUpObj = null;
 	}
@@ -123,12 +123,11 @@ public class SwapManager : MonoBehaviour {
 	}
 
 	public void DisablePlayers() {
-		player1.enabled = false;
-		player2.enabled = false;
+		Destroy(player1);
+		Destroy(player2);
 	}
 
 	public void EnablePlayers() {
-		player1.enabled = true;
-		player2.enabled = true;
+		SetupPlayerManagers();
 	}
 }

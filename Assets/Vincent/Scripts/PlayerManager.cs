@@ -134,15 +134,35 @@ public class PlayerManager : MonoBehaviour {
         {
             facingRight = false;
         }
-
-        if (facingRight)
-        {
-            graphicsSlot.localScale = new Vector3(1, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
-        }
-        else if (!facingRight)
-        {
-            graphicsSlot.localScale = new Vector3(-1, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
-        }
+		switch(blockSize) {
+			case BlockSize.small:
+				if(facingRight) {
+					graphicsSlot.localScale = new Vector3(1 * SMALL_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+				}
+				else if(!facingRight) {
+					graphicsSlot.localScale = new Vector3(-1 * SMALL_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+				}
+				break;
+			case BlockSize.medium:
+				if(facingRight) {
+					graphicsSlot.localScale = new Vector3(1 * MEDIUM_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+				}
+				else if(!facingRight) {
+					graphicsSlot.localScale = new Vector3(-1 * MEDIUM_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+				}
+				break;
+			case BlockSize.large:
+				if(facingRight) {
+					graphicsSlot.localScale = new Vector3(1 * LARGE_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+				}
+				else if(!facingRight) {
+					graphicsSlot.localScale = new Vector3(-1 * LARGE_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+				}
+				break;
+			default:
+				break;
+		}
+		
 
 
 		// CLIMBING
