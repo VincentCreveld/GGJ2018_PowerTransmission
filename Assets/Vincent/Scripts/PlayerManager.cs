@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour {
 
@@ -35,11 +36,14 @@ public class PlayerManager : MonoBehaviour {
 	private GameObject B_UI;
 	private GameObject X_UI;
 	private GameObject Y_UI;
+    private GameObject AGrey_UI;
+    private GameObject BGrey_UI;
+    private GameObject XGrey_UI;
+    private GameObject YGrey_UI;
 
 
-
-	//The bool has to be true when an item is held for the swpmanager to function.
-	public Transform pickupSlot;
+    //The bool has to be true when an item is held for the swpmanager to function.
+    public Transform pickupSlot;
 	public bool hasItem = false;
 
 	public BlockSize blockSize = BlockSize.medium;
@@ -84,12 +88,22 @@ public class PlayerManager : MonoBehaviour {
 		X_UI = GetComponentInChildren<Canvas>().transform.GetChild(2).gameObject;
 		Y_UI = GetComponentInChildren<Canvas>().transform.GetChild(3).gameObject;
 
-		A_UI.SetActive(a_isEnabled);
+        AGrey_UI = GetComponentInChildren<Canvas>().transform.GetChild(4).gameObject;
+        BGrey_UI = GetComponentInChildren<Canvas>().transform.GetChild(5).gameObject;
+        XGrey_UI = GetComponentInChildren<Canvas>().transform.GetChild(6).gameObject;
+        YGrey_UI = GetComponentInChildren<Canvas>().transform.GetChild(7).gameObject;
+
+        A_UI.SetActive(a_isEnabled);
 		B_UI.SetActive(b_isEnabled);
 		X_UI.SetActive(x_isEnabled);
 		Y_UI.SetActive(y_isEnabled);
 
-		pickupSlot = transform.GetChild(2);
+        AGrey_UI.SetActive(!a_isEnabled);
+        BGrey_UI.SetActive(!b_isEnabled);
+        XGrey_UI.SetActive(!x_isEnabled);
+        YGrey_UI.SetActive(!y_isEnabled);
+
+        pickupSlot = transform.GetChild(2);
 
 		graphicsSlot = transform.GetChild(3);
 	}
@@ -352,27 +366,31 @@ public class PlayerManager : MonoBehaviour {
 		Debug.Log(connectedController.GetControllerName() + "Swapping A bool!");
 		a_isEnabled = !a_isEnabled;
 		A_UI.SetActive(a_isEnabled);
-	}
-	public void B_SwapBool() {
+        AGrey_UI.SetActive(!a_isEnabled);
+    }
+    public void B_SwapBool() {
 		Debug.Log(connectedController.GetControllerName() + "Swapping B bool!");
 		b_isEnabled = !b_isEnabled;
 		B_UI.SetActive(b_isEnabled);
-	}
+        BGrey_UI.SetActive(!b_isEnabled);
+    }
 	public void X_SwapBool() {
 		Debug.Log(connectedController.GetControllerName() + "Swapping X bool!");
 		x_isEnabled = !x_isEnabled;
 		X_UI.SetActive(x_isEnabled);
-	}
-	public void Y_SwapBool() {
+		XGrey_UI.SetActive(!x_isEnabled);
+    }
+    public void Y_SwapBool() {
 		Debug.Log(connectedController.GetControllerName() + "Swapping Y bool!");
 		y_isEnabled = !y_isEnabled;
 		Y_UI.SetActive(y_isEnabled);
-	}
-	#endregion
+		YGrey_UI.SetActive(!y_isEnabled);
+    }
+    #endregion
 
-	#region Swap Calls
-	//These functions are called with input to notify the SwapManager to switch over the controls.
-	public void A_SwapCall() {
+    #region Swap Calls
+    //These functions are called with input to notify the SwapManager to switch over the controls.
+    public void A_SwapCall() {
 		A_ButtonSwap();
 	}
 	public void B_SwapCall() {
