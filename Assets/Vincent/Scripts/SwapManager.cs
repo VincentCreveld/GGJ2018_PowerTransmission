@@ -11,8 +11,8 @@ public class SwapManager : MonoBehaviour {
 	public GameObject objPlayer1;
 	public GameObject objPlayer2;
 
-	private PlayerManager player1;
-	private PlayerManager player2;
+	public PlayerManager player1;
+	public PlayerManager player2;
 
 	//Enter button functionality
 	public TransmissionEvent A_ButtonTransmission;

@@ -32,6 +32,10 @@ public class PlayerManager : MonoBehaviour {
 	private GameObject X_UI;
 	private GameObject Y_UI;
 
+	//The bool has to be true when an item is held for the swpmanager to function.
+	public Transform pickupSlot;
+	public bool hasItem = false;
+
 	public BlockSize blockSize;
 
 
@@ -75,6 +79,8 @@ public class PlayerManager : MonoBehaviour {
 		B_UI.SetActive(b_isEnabled);
 		X_UI.SetActive(x_isEnabled);
 		Y_UI.SetActive(y_isEnabled);
+
+		pickupSlot = transform.GetChild(2);
 	}
 
 	//input is handled here.
@@ -105,11 +111,12 @@ public class PlayerManager : MonoBehaviour {
 				Jump();
 			}
 			if(b_active) {
+				Shrink();
 				Debug.Log(connectedController.GetControllerName() + "B");
 			}
 			if(x_active) {
-				Shrink();
-				Debug.Log(connectedController.GetControllerName() + "X");
+				//Gets handled in OnTriggerStay()
+				//Debug.Log(connectedController.GetControllerName() + "X");
 			}
 			if(y_active) {
 				Grow();
@@ -167,6 +174,19 @@ public class PlayerManager : MonoBehaviour {
 			climbable = true;
 			rigidBody2D.gravityScale = 0;
 		}
+
+	}
+
+	private void OnTriggerStay2D(Collider2D collision) {
+		if(collision.gameObject.GetComponent<IInteractable>() != null) {
+			if(x_active) {
+				//Gets handled in OnTriggerStay()
+				Debug.Log(connectedController.GetControllerName() + "X");
+				Interact(collision.gameObject.GetComponent<IInteractable>());
+			}else if(x_active && hasItem) {
+				DropItem();
+			}
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision) {
@@ -176,13 +196,27 @@ public class PlayerManager : MonoBehaviour {
 		}
 	}
 
-	
 
 	private void Jump() {
 		if(grounded) {
 			rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpForce);
 			tempMove = moveHorizontal;
 		}
+	}
+
+	public void PickupItem(Transform item) {
+		swapManager.X_ButtonTransmission += DropItem;
+		hasItem = true;
+		item.parent = pickupSlot;
+		//Insert functionality here @Sten
+	}
+
+	public void DropItem() {
+		hasItem = false;
+		foreach(Transform child in pickupSlot) {
+			child.transform.parent = null;
+		}
+		swapManager.X_ButtonTransmission -= DropItem;
 	}
 
 	private void Shrink() {
@@ -212,6 +246,9 @@ public class PlayerManager : MonoBehaviour {
 				blockSize = BlockSize.large;
 				break;
 		}
+	}
+	private void Interact(IInteractable i) {
+		i.Act(transform);
 	}
 	#endregion
 
