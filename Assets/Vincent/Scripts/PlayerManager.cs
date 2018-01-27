@@ -18,6 +18,12 @@ public class PlayerManager : MonoBehaviour {
 	public bool x_isEnabled;
 	public bool y_isEnabled;
 
+	public bool a_active;
+	public bool b_active;
+	public bool x_active;
+	public bool y_active;
+	public bool trig_active;
+
 	private SwapManager swapManager;
 	public ControllerInput connectedController;
 
@@ -25,6 +31,8 @@ public class PlayerManager : MonoBehaviour {
 	private GameObject B_UI;
 	private GameObject X_UI;
 	private GameObject Y_UI;
+
+	public BlockSize blockSize;
 
 
 	#region Variabele Celine player manager
@@ -71,36 +79,40 @@ public class PlayerManager : MonoBehaviour {
 
 	//input is handled here.
 	private void FixedUpdate() {
-		if(connectedController.Trig_CheckInput()) {
-			if(connectedController.A_CheckInput() && a_isEnabled) {
+		if(trig_active) {
+			if(a_active && a_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "A Trigger!");
 				//Should be empty because the jump ability can't be transmitted.
 			}
-			if(connectedController.B_CheckInput() && b_isEnabled) {
+			if(b_active && b_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "B Trigger!");
 				B_SwapCall();
 			}
-			if(connectedController.X_CheckInput() && x_isEnabled) {
+			if(x_active && x_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "X Trigger!");
 				X_SwapCall();
+				Y_SwapCall();
 			}
-			if(connectedController.Y_CheckInput() && y_isEnabled) {
+			if(y_active && y_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "Y Trigger!");
 				Y_SwapCall();
+				X_SwapCall();
 			}
 		}
 		else {
-			if(connectedController.A_CheckInput()) {
+			if(a_active) {
 				Debug.Log(connectedController.GetControllerName() + "A");
 				Jump();
 			}
-			if(connectedController.B_CheckInput()) {
+			if(b_active) {
 				Debug.Log(connectedController.GetControllerName() + "B");
 			}
-			if(connectedController.X_CheckInput()) {
+			if(x_active) {
+				Shrink();
 				Debug.Log(connectedController.GetControllerName() + "X");
 			}
-			if(connectedController.Y_CheckInput()) {
+			if(y_active) {
+				Grow();
 				Debug.Log(connectedController.GetControllerName() + "Y");
 			}
 		}
@@ -142,6 +154,12 @@ public class PlayerManager : MonoBehaviour {
 		else {
 			grounded = false;
 		}
+
+		trig_active = connectedController.Trig_CheckInput();
+		a_active = connectedController.A_CheckInput();
+		b_active = connectedController.B_CheckInput();
+		x_active = connectedController.X_CheckInput();
+		y_active = connectedController.Y_CheckInput();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
@@ -164,6 +182,35 @@ public class PlayerManager : MonoBehaviour {
 		if(grounded) {
 			rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpForce);
 			tempMove = moveHorizontal;
+		}
+	}
+
+	private void Shrink() {
+		Debug.Log("Shrink!");
+		switch(blockSize) {
+			case BlockSize.small:
+				blockSize = BlockSize.small;
+				break;
+			case BlockSize.medium:
+				blockSize = BlockSize.small;
+				break;
+			case BlockSize.large:
+				blockSize = BlockSize.medium;
+				break;
+		}
+	}
+	private void Grow() {
+		Debug.Log("Grow!");
+		switch(blockSize) {
+			case BlockSize.small:
+				blockSize = BlockSize.medium;
+				break;
+			case BlockSize.medium:
+				blockSize = BlockSize.large;
+				break;
+			case BlockSize.large:
+				blockSize = BlockSize.large;
+				break;
 		}
 	}
 	#endregion

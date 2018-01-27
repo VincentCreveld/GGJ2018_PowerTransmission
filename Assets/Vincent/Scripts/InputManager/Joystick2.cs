@@ -5,7 +5,8 @@ using UnityEngine;
 public class Joystick2 : ControllerInput {
 
 	public override bool Trig_CheckInput() {
-		if(Input.GetAxis("LeftBumperJ2") >= 1) {
+		//Debug.Log(Input.GetAxis("LeftTriggerJ2"));
+		if(Input.GetAxis("LeftTriggerJ2") >= .85f) {
 			return true;
 		}
 		else

@@ -6,7 +6,7 @@ public class Joystick1 : ControllerInput {
 
 
 	public override bool Trig_CheckInput() {
-		if(Input.GetAxis("LeftBumperJ1") >= 1) {
+		if(Input.GetAxis("LeftTriggerJ1") >= .85f) {
 			return true;
 		}
 		else
