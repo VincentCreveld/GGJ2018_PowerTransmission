@@ -14,12 +14,30 @@ public class LeverScript : MonoBehaviour, IInteractable {
     private float moveSpeed;
 
     private bool isAtEnd = false;
-    
+    public bool isButton = false;
+
+    [SerializeField]
+    private Sprite idleState;
+    [SerializeField]
+    private Sprite interactedState;
+
 	// Use this for initialization
 	public void Act(Transform playerPos) {
-        MoveObject();
+        if (!isButton) {
+            MoveObject();
+
+        }
 	}
-	public void Update() {
+
+    public void OnTriggerEnter2D(Collider2D col) {
+
+    }
+    public void OnTriggerExit2D(Collider2D col) {
+
+    }
+
+
+    public void Update() {
         float step = moveSpeed * Time.deltaTime;
         if (!isAtEnd) {
             objectToMove.transform.position = Vector3.MoveTowards(objectToMove.position, endPos.position, step);
@@ -30,10 +48,15 @@ public class LeverScript : MonoBehaviour, IInteractable {
 	private void MoveObject() {
         if (objectToMove.position == endPos.position) {
             isAtEnd = true;
+            Debug.Log("At end");
+            this.GetComponent<SpriteRenderer>().sprite = idleState;
+            this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
         }
-        else { isAtEnd = false; }    
-            //        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
-            //objectToMove.transform.position = Vector3.MoveTowards(startPos, endPos,);
+        else { isAtEnd = false;
+            Debug.Log("To begin");
+            this.GetComponent<SpriteRenderer>().sprite = interactedState;
+            this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
+        }    
         }
 	}
 
