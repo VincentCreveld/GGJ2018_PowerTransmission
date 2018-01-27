@@ -207,8 +207,13 @@ public class PlayerManager : MonoBehaviour {
 				Debug.Log(connectedController.GetControllerName() + "B");
 			}
 			if(x_active && x_isEnabled && hasItem) {
-				//Gets handled in OnTriggerStay()
-				DropItem();
+                //Gets handled in OnTriggerStay()
+                /*Debug.Log(x_active);
+                Debug.Log(x_isEnabled);
+                Debug.Log(hasItem);
+                Debug.Break();*/
+                DropItem();
+
 				Debug.Log(connectedController.GetControllerName() + "X");
 			}
 			if(y_active && y_isEnabled) {
@@ -230,6 +235,9 @@ public class PlayerManager : MonoBehaviour {
 
 	private void OnTriggerStay2D(Collider2D collision) {
 		if(collision.gameObject.GetComponent<IInteractable>() != null) {
+            /*Debug.Log(x_active);
+            Debug.Log(x_isEnabled);
+            Debug.Log(hasItem);*/
 			if(x_active && x_isEnabled && !hasItem) {
 				//Gets handled in OnTriggerStay()
 				Debug.Log(connectedController.GetControllerName() + "X");
@@ -311,8 +319,9 @@ public class PlayerManager : MonoBehaviour {
 		}
 	}
 	private void Interact(IInteractable i) {
+        Debug.Log(i);
 		i.Act(transform);
-		hasItem = true;
+		//hasItem = true;
 	}
 
 	public void PickupItem(Transform item) {
