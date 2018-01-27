@@ -14,13 +14,24 @@ public class EventManager : MonoBehaviour {
 		else
 			Debug.LogError("More than one eventmanager in scene.");
 
-		playerDeath += DeathEvent;
+		playerDeath += PlayerDeath;
 	}
 
 	private void DeathEvent() {
         LevelManager.instance.ResetLevel();
         Debug.Log("Died");
-
     }
+
+	public void PlayerDeath() {
+		StartCoroutine(_PlayerDeath());
+	}
+
+	private IEnumerator _PlayerDeath() {
+		MessageCenter.instance.SendMessage(2, "You Died.");
+		SwapManager.instance.DisablePlayers();
+		yield return new WaitForSeconds(2);
+		SwapManager.instance.EnablePlayers();
+		DeathEvent();
+	}
 
 }

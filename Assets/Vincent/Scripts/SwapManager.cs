@@ -121,4 +121,14 @@ public class SwapManager : MonoBehaviour {
 			player2.hasItem = false;
 		}
 	}
+
+	public void DisablePlayers() {
+		player1.enabled = false;
+		player2.enabled = false;
+	}
+
+	public void EnablePlayers() {
+		player1.enabled = true;
+		player2.enabled = true;
+	}
 }
