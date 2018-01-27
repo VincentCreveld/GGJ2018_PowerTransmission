@@ -28,6 +28,8 @@ public class LevelManager : MonoBehaviour
         moveCamera = FindObjectOfType<MoveCamera>();
         audioManager = FindObjectOfType<AudioManager>();
 
+        audioManager.soundTrack(musicTrack.gameSound);
+
         player1 = SwapManager.instance.objPlayer1;
         player2 = SwapManager.instance.objPlayer2;
 

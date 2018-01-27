@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum musicTrack { startScreenSound = 0, level1Sound, level2Sound, level3Sound, level4Sound, level5Sound, gameOverSound, menuSound };
+public enum musicTrack { gameSound = 0 };
 public enum environmentalSound { };
 public enum uiSounds { cameraSwitch = 0, openMenu, callSwitch, textOpen, textCloses,  };
 public enum interactionSounds {pickupSound=0,woodDropSound, stoneDropSound,glassDropSound,steelDropSound};
@@ -47,7 +47,11 @@ public class AudioManager : MonoBehaviour {
         if (!musicTracks.isPlaying) {
             musicTracks.clip = musicList[(int)song];
             musicTracks.Play();
-        }else {
+            musicTracks.loop = true;
+            musicTracks.volume = 0.8f;
+
+        }
+        else {
             StartCoroutine(waitForSoundTrack(song));
         }     
         return musicTracks;
@@ -80,6 +84,7 @@ public class AudioManager : MonoBehaviour {
         if (!uiSounds.isPlaying) {
             uiSounds.clip = uiList[(int)sound];
             uiSounds.Play();
+
         }
         else {
             StartCoroutine(waitForUITrack(sound));
