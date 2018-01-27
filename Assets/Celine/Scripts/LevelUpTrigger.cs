@@ -9,7 +9,7 @@ public class LevelUpTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerManager>() && firstEntered == false)
+        if (collision.gameObject.GetComponent<PlayerManager>() && firstEntered == false )
         {
             firstEntered = true;
         }

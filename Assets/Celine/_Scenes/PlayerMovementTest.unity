@@ -2187,7 +2187,8 @@ MonoBehaviour:
   uiSounds: {fileID: 1430894608}
   interactionSounds: {fileID: 1430894607}
   transitionSoundSource: {fileID: 1430894607}
-  musicList: []
+  musicList:
+  - {fileID: 8300000, guid: 6f1575569aaf8b043a239cdab8fe13cd, type: 3}
   environmentalSoundList: []
   uiList:
   - {fileID: 8300000, guid: 6b0fb0840a5372f43af28f7bc940628e, type: 3}
