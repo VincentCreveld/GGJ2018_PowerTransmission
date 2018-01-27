@@ -39,12 +39,11 @@ public class SwapManager : MonoBehaviour {
 	private void SetupPlayerManagers() {
 		player1 = objPlayer1.AddComponent<PlayerManager>();
 		player1.connectedController = new Joystick1();
-		player1.Initialize();
-		Debug.Log("Reached");
+		
 
 		player2 = objPlayer2.AddComponent<PlayerManager>();
 		player2.connectedController = new Joystick2();
-		player2.Initialize();
+		
 
 		
 		player1.A_ButtonSwap += A_Swap;
@@ -53,6 +52,7 @@ public class SwapManager : MonoBehaviour {
 		player1.Y_ButtonSwap += Y_Swap;
 		player1.a_isEnabled = true;
 		player1.b_isEnabled = true;
+		player1.Initialize();
 		//player1.whatIsGround = gameObject.layer;
 
 		player2.A_ButtonSwap += A_Swap;
@@ -61,6 +61,7 @@ public class SwapManager : MonoBehaviour {
 		player2.Y_ButtonSwap += Y_Swap;
 		player2.x_isEnabled = true;
 		player2.y_isEnabled = true;
+		player2.Initialize();
 		//player2.whatIsGround = gameObject.layer;
 	}
 

@@ -21,6 +21,11 @@ public class PlayerManager : MonoBehaviour {
 	private SwapManager swapManager;
 	public ControllerInput connectedController;
 
+	private GameObject A_UI;
+	private GameObject B_UI;
+	private GameObject X_UI;
+	private GameObject Y_UI;
+
 
 	#region Variabele Celine player manager
 	public float speed = 6;
@@ -50,6 +55,18 @@ public class PlayerManager : MonoBehaviour {
 
 		rigidBody2D = GetComponent<Rigidbody2D>();
 		gravityScale = rigidBody2D.gravityScale;
+
+		EventManager.instance.playerDeath += Die;
+
+		A_UI = GetComponentInChildren<Canvas>().transform.GetChild(0).gameObject;
+		B_UI = GetComponentInChildren<Canvas>().transform.GetChild(1).gameObject;
+		X_UI = GetComponentInChildren<Canvas>().transform.GetChild(2).gameObject;
+		Y_UI = GetComponentInChildren<Canvas>().transform.GetChild(3).gameObject;
+
+		A_UI.SetActive(a_isEnabled);
+		B_UI.SetActive(b_isEnabled);
+		X_UI.SetActive(x_isEnabled);
+		Y_UI.SetActive(y_isEnabled);
 	}
 
 	//input is handled here.
@@ -158,24 +175,30 @@ public class PlayerManager : MonoBehaviour {
 		swapManager.Y_ButtonTransmission += Y_SwapBool;
 	}
 
-	
+	private void Die() {
+		//Everything onDeath!
+	}
 
 	#region Bool swap functionality
 	public void A_SwapBool() {
 		Debug.Log(connectedController.GetControllerName() + "Swapping A bool!");
 		a_isEnabled = !a_isEnabled;
+		A_UI.SetActive(a_isEnabled);
 	}
 	public void B_SwapBool() {
 		Debug.Log(connectedController.GetControllerName() + "Swapping B bool!");
 		b_isEnabled = !b_isEnabled;
+		B_UI.SetActive(b_isEnabled);
 	}
 	public void X_SwapBool() {
 		Debug.Log(connectedController.GetControllerName() + "Swapping X bool!");
 		x_isEnabled = !x_isEnabled;
+		X_UI.SetActive(x_isEnabled);
 	}
 	public void Y_SwapBool() {
 		Debug.Log(connectedController.GetControllerName() + "Swapping Y bool!");
 		y_isEnabled = !y_isEnabled;
+		Y_UI.SetActive(y_isEnabled);
 	}
 	#endregion
 
