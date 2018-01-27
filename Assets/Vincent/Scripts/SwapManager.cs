@@ -6,6 +6,11 @@ using UnityEngine;
 //This class controls the transmission of powers between the two players in scene.
 public class SwapManager : MonoBehaviour {
 
+	public static SwapManager instance;
+
+	public GameObject objPlayer1;
+	public GameObject objPlayer2;
+
 	private PlayerManager player1;
 	private PlayerManager player2;
 
@@ -18,31 +23,45 @@ public class SwapManager : MonoBehaviour {
 	//Enter button functionality
 	public TransmissionEvent Y_ButtonTransmission;
 
+	private void Awake() {
+		if(instance == null)
+			instance = this;
+		else
+			Application.Quit();
+	}
+
 	private void Start() {
 		SetupPlayerManagers();
+		Debug.Log(LayerMask.NameToLayer("Default"));
 	}
 
 
 	private void SetupPlayerManagers() {
-		player1 = gameObject.AddComponent<PlayerManager>();
+		player1 = objPlayer1.AddComponent<PlayerManager>();
 		player1.connectedController = new Joystick1();
-		player2 = gameObject.AddComponent<PlayerManager>();
-		player2.connectedController = new Joystick2();
+		player1.Initialize();
+		Debug.Log("Reached");
 
+		player2 = objPlayer2.AddComponent<PlayerManager>();
+		player2.connectedController = new Joystick2();
+		player2.Initialize();
+
+		
 		player1.A_ButtonSwap += A_Swap;
 		player1.B_ButtonSwap += B_Swap;
 		player1.X_ButtonSwap += X_Swap;
 		player1.Y_ButtonSwap += Y_Swap;
+		player1.a_isEnabled = true;
+		player1.b_isEnabled = true;
+		//player1.whatIsGround = gameObject.layer;
 
 		player2.A_ButtonSwap += A_Swap;
 		player2.B_ButtonSwap += B_Swap;
 		player2.X_ButtonSwap += X_Swap;
 		player2.Y_ButtonSwap += Y_Swap;
-
-		player1.a_isEnabled = true;
-		player1.b_isEnabled = true;
 		player2.x_isEnabled = true;
 		player2.y_isEnabled = true;
+		//player2.whatIsGround = gameObject.layer;
 	}
 
 	#region Swap Calls

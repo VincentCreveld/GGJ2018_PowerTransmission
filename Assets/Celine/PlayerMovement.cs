@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         gravityScale = rigidBody2D.gravityScale;
+		groundCheck = transform.GetChild(0);
     }
 
     void FixedUpdate()

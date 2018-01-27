@@ -24,4 +24,11 @@ public class ControllerInput {
 	public virtual string GetControllerName() {
 		return "";
 	}
+
+	public virtual string GetVertical() {
+		return "";
+	}
+	public virtual string GetHorizontal() {
+		return "";
+	}
 }

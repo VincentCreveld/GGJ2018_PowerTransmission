@@ -43,4 +43,10 @@ public class Joystick2 : ControllerInput {
 	public override string GetControllerName() {
 		return "Joystick 2 ";
 	}
+	public override string GetVertical() {
+		return "VerticalJ2";
+	}
+	public override string GetHorizontal() {
+		return "HorizontalJ2";
+	}
 }
