@@ -14,6 +14,9 @@ public class SwapManager : MonoBehaviour {
 	public PlayerManager player1;
 	public PlayerManager player2;
 
+	public Vector3 p1StartPos;
+	public Vector3 p2StartPos;
+
 	//Enter button functionality
 	public TransmissionEvent A_ButtonTransmission;
 	//Enter button functionality
@@ -35,19 +38,18 @@ public class SwapManager : MonoBehaviour {
 
 	private void Start() {
 		SetupPlayerManagers();
+		p1StartPos = player1.transform.position;
+		p2StartPos = player2.transform.position;
 	}
 
 
 	private void SetupPlayerManagers() {
 		player1 = objPlayer1.AddComponent<PlayerManager>();
 		player1.connectedController = new Joystick1();
-		
 
 		player2 = objPlayer2.AddComponent<PlayerManager>();
 		player2.connectedController = new Joystick2();
-		
 
-		
 		player1.A_ButtonSwap += A_Swap;
 		player1.B_ButtonSwap += B_Swap;
 		player1.X_ButtonSwap += X_Swap;
@@ -129,5 +131,7 @@ public class SwapManager : MonoBehaviour {
 
 	public void EnablePlayers() {
 		SetupPlayerManagers();
+		player1.transform.position = p1StartPos;
+		player2.transform.position = p2StartPos;
 	}
 }

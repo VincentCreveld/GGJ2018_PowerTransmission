@@ -61,7 +61,7 @@ public class PlayerManager : MonoBehaviour {
 	private float moveHorizontal;
 	private float tempMove;
 	private bool climbable = false;
-    private bool facingRight = true;
+    private bool facingRight = false;
 	#endregion
 
 	public void Initialize() {
@@ -125,44 +125,36 @@ public class PlayerManager : MonoBehaviour {
 			}
 		}
 
+		if(moveHorizontal < -.19) {
+			
+			if(graphicsSlot.localScale.x < 0) {
 
-        if (moveHorizontal > 0.19)
-        {
-            facingRight = true;
-        }
-        else if (moveHorizontal < -0.19)
-        {
-            facingRight = false;
-        }
-		switch(blockSize) {
-			case BlockSize.small:
-				if(facingRight) {
-					graphicsSlot.localScale = new Vector3(1 * SMALL_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
-				}
-				else if(!facingRight) {
-					graphicsSlot.localScale = new Vector3(-1 * SMALL_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
-				}
-				break;
-			case BlockSize.medium:
-				if(facingRight) {
-					graphicsSlot.localScale = new Vector3(1 * MEDIUM_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
-				}
-				else if(!facingRight) {
-					graphicsSlot.localScale = new Vector3(-1 * MEDIUM_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
-				}
-				break;
-			case BlockSize.large:
-				if(facingRight) {
-					graphicsSlot.localScale = new Vector3(1 * LARGE_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
-				}
-				else if(!facingRight) {
-					graphicsSlot.localScale = new Vector3(-1 * LARGE_SIZE, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
-				}
-				break;
-			default:
-				break;
+				graphicsSlot.localScale = new Vector3(-graphicsSlot.localScale.x, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+
+
+				pickupSlot.localPosition = new Vector3(-pickupSlot.localPosition.x, pickupSlot.localPosition.y, pickupSlot.localPosition.z);
+			}
 		}
-		
+		if (moveHorizontal > .19)
+        {
+			
+			if(graphicsSlot.localScale.x > 0) {
+
+				graphicsSlot.localScale = new Vector3(-graphicsSlot.localScale.x, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+
+
+				pickupSlot.localPosition = new Vector3(-pickupSlot.localPosition.x, pickupSlot.localPosition.y, pickupSlot.localPosition.z);
+			}
+        }
+
+		/*
+		if(facingRight) {
+			graphicsSlot.localScale = new Vector3(1, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+		}
+		else if(!facingRight) {
+			graphicsSlot.localScale = new Vector3(-1, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
+		}
+		*/
 
 
 		// CLIMBING
