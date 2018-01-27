@@ -11,14 +11,19 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     
     private Rigidbody2D rigidBody2D;
-    public bool grounded = true;
+    private bool grounded = true;
     private float groundRadius = 0.2f;
+    private float gravityScale;
+
+    private float moveVertical;
     private float moveHorizontal;
     private float tempMove;
+    private bool climbable = false;
 
     void Start ()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
+        gravityScale = rigidBody2D.gravityScale;
     }
 
     void FixedUpdate()
@@ -33,8 +38,8 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
 
+        // MOVING HORIZONTALLY
         moveHorizontal = (Input.GetAxis("Horizontal"));
-
         if (grounded)
         {
             rigidBody2D.velocity = new Vector2(moveHorizontal * speed, rigidBody2D.velocity.y);
@@ -52,7 +57,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // If player is grounded, player can jump
+        // CLIMBING
+        moveVertical = (Input.GetAxis("Vertical"));
+        if (climbable)
+        {
+            rigidBody2D.velocity = new Vector2(moveHorizontal * speed, moveVertical * speed);
+        }
+
+        // JUMPING
         if (grounded && (Input.GetAxis("A_Button") >= 0.01))
         {
             rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpForce);
@@ -60,8 +72,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.tag == "Stairs")
+        {
+            climbable = true;
+            rigidBody2D.gravityScale = 0;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Stairs")
+        {
+            climbable = false;
+            rigidBody2D.gravityScale = gravityScale;
+        }
     }
 }
