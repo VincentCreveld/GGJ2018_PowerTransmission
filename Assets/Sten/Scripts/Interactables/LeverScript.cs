@@ -30,10 +30,18 @@ public class LeverScript : MonoBehaviour, IInteractable {
 	}
 
     public void OnTriggerEnter2D(Collider2D col) {
-
+        if (isButton) {
+            MoveObject(); //Even checken anders een call maken in exit ook
+            this.GetComponent<SpriteRenderer>().sprite = idleState;
+            this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
+        }
     }
     public void OnTriggerExit2D(Collider2D col) {
-
+        if (isButton) {
+            isAtEnd = true;
+            this.GetComponent<SpriteRenderer>().sprite = interactedState;
+            this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
+        }
     }
 
 

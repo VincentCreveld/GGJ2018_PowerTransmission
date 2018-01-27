@@ -172,7 +172,7 @@ MonoBehaviour:
   startPos: {fileID: 4632998787731740}
   endPos: {fileID: 4322012758220864}
   moveSpeed: 5
-  isButton: 0
+  isButton: 1
   idleState: {fileID: 21300000, guid: 9f00dfefe0788e641854a91b22f5d423, type: 3}
   interactedState: {fileID: 21300000, guid: 7af9dd2fd5898d4469be6a35e5c9eac4, type: 3}
 --- !u!212 &212540753170812908
