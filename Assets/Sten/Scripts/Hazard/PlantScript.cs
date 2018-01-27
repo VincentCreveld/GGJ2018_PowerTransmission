@@ -20,8 +20,6 @@ public class PlantScript : MonoBehaviour {
             if (col.gameObject.GetComponent<SwordScript>() != null) {
                 StartCoroutine(DiePlant());
             }
-
-
         }
         }
 
