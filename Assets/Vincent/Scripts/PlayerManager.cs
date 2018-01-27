@@ -41,6 +41,11 @@ public class PlayerManager : MonoBehaviour {
     private GameObject XGrey_UI;
     private GameObject YGrey_UI;
 
+    private Animator A_Animator;
+    private Animator B_Animator;
+    private Animator X_Animator;
+    private Animator Y_Animator;
+
 
     //The bool has to be true when an item is held for the swpmanager to function.
     public Transform pickupSlot;
@@ -103,6 +108,11 @@ public class PlayerManager : MonoBehaviour {
         XGrey_UI.SetActive(!x_isEnabled);
         YGrey_UI.SetActive(!y_isEnabled);
 
+        A_Animator = A_UI.GetComponent<Animator>();
+        B_Animator = B_UI.GetComponent<Animator>();
+        X_Animator = X_UI.GetComponent<Animator>();
+        Y_Animator = Y_UI.GetComponent<Animator>();
+
         pickupSlot = transform.GetChild(2);
 
 		graphicsSlot = transform.GetChild(3);
@@ -113,6 +123,7 @@ public class PlayerManager : MonoBehaviour {
 		if(trig_active) {
 			if(a_active && a_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "A Trigger!");
+                
 				//Should be empty because the jump ability can't be transmitted.
 			}
 		}
@@ -200,23 +211,33 @@ public class PlayerManager : MonoBehaviour {
 		y_active = connectedController.Y_CheckInput();
 
 		if(trig_active) {
-			if(b_active && b_isEnabled) {
+            A_Animator.SetBool("leftTrigger", true);
+            B_Animator.SetBool("leftTrigger", true);
+            X_Animator.SetBool("leftTrigger", true);
+            Y_Animator.SetBool("leftTrigger", true);
+            if (b_active && b_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "B Trigger!");
 				B_SwapCall();
 				Y_SwapCall();
-			}
-			if(x_active && x_isEnabled) {
+
+            }
+            if (x_active && x_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "X Trigger!");
 				X_SwapCall();
-			}
-			if(y_active && y_isEnabled) {
+            }
+            if (y_active && y_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "Y Trigger!");
 				Y_SwapCall();
 				B_SwapCall();
-			}
-		}
+            }
+        }
 		else {
-			if(b_active && b_isEnabled) {
+            A_Animator.SetBool("leftTrigger", false);
+            B_Animator.SetBool("leftTrigger", false);
+            X_Animator.SetBool("leftTrigger", false);
+            Y_Animator.SetBool("leftTrigger", false);
+
+            if (b_active && b_isEnabled) {
 				Shrink();
 				Debug.Log(connectedController.GetControllerName() + "B");
 			}
