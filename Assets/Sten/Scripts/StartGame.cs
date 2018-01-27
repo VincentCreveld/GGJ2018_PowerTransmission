@@ -32,6 +32,6 @@ public class StartGame : MonoBehaviour {
 
 	// Update is called once per frame
 	public void StartMainGame() {
-        SceneManager.LoadScene("MainGame");
+        SceneManager.LoadScene(1);
 	}
 }
