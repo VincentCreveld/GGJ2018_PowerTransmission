@@ -223,7 +223,9 @@ public class PlayerManager : MonoBehaviour {
 			climbable = true;
 			rigidBody2D.gravityScale = 0;
 		}
-
+		if(collision.tag == "Door") {
+			collision.GetComponent<DoorScript>().playerPresent = true;
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision) {
@@ -233,13 +235,22 @@ public class PlayerManager : MonoBehaviour {
 				Debug.Log(connectedController.GetControllerName() + "X");
 				Interact(collision.gameObject.GetComponent<IInteractable>());
 			}
+			if(collision.tag == "Door" && x_active && x_isEnabled) {
+				if(collision.GetComponent<DoorScript>().playerCanProceed) {
+					collision.gameObject.GetComponent<IInteractable>().Act(transform);
+				}
+			}
 		}
+		
 	}
 
 	private void OnTriggerExit2D(Collider2D collision) {
 		if(collision.tag == "Stairs") {
 			climbable = false;
 			rigidBody2D.gravityScale = gravityScale;
+		}
+		if(collision.tag == "Door") {
+			collision.GetComponent<DoorScript>().playerPresent = false;
 		}
 	}
 
