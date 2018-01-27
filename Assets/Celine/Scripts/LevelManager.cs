@@ -44,7 +44,6 @@ public class LevelManager : MonoBehaviour
         // Move the camera up to the new level
         moveCamera.MoveUp();
         audioManager.uiSoundTrack(uiSounds.cameraSwitch);
-
         level++;
         Debug.Log("This is level " + level);
     }

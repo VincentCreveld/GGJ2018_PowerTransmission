@@ -143,7 +143,7 @@ public class PlayerManager : MonoBehaviour {
 
 		if(moveHorizontal < -.19) {
 			
-			if(graphicsSlot.localScale.x < 0) {
+			if(graphicsSlot.localScale.x > 0) {
 
 				graphicsSlot.localScale = new Vector3(-graphicsSlot.localScale.x, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
 
@@ -154,7 +154,7 @@ public class PlayerManager : MonoBehaviour {
 		if (moveHorizontal > .19)
         {
 			
-			if(graphicsSlot.localScale.x > 0) {
+			if(graphicsSlot.localScale.x < 0) {
 
 				graphicsSlot.localScale = new Vector3(-graphicsSlot.localScale.x, graphicsSlot.localScale.y, graphicsSlot.localScale.z);
 
