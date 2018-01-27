@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
+	private const float SMALL_SIZE = .5f;
+	private const float MEDIUM_SIZE = 1f;
+	private const float LARGE_SIZE = 1.5f;
+
 	//Enter button functionality
 	public TransmissionEvent X_ButtonSwap;
 	//Enter button functionality
@@ -36,7 +40,7 @@ public class PlayerManager : MonoBehaviour {
 	public Transform pickupSlot;
 	public bool hasItem = false;
 
-	public BlockSize blockSize;
+	public BlockSize blockSize = BlockSize.medium;
 
 
 	#region Variabele Celine player manager
@@ -90,37 +94,11 @@ public class PlayerManager : MonoBehaviour {
 				Debug.Log(connectedController.GetControllerName() + "A Trigger!");
 				//Should be empty because the jump ability can't be transmitted.
 			}
-			if(b_active && b_isEnabled) {
-				Debug.Log(connectedController.GetControllerName() + "B Trigger!");
-				B_SwapCall();
-			}
-			if(x_active && x_isEnabled) {
-				Debug.Log(connectedController.GetControllerName() + "X Trigger!");
-				X_SwapCall();
-				Y_SwapCall();
-			}
-			if(y_active && y_isEnabled) {
-				Debug.Log(connectedController.GetControllerName() + "Y Trigger!");
-				Y_SwapCall();
-				X_SwapCall();
-			}
 		}
 		else {
-			if(a_active) {
+			if(a_active && a_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "A");
 				Jump();
-			}
-			if(b_active) {
-				Shrink();
-				Debug.Log(connectedController.GetControllerName() + "B");
-			}
-			if(x_active) {
-				//Gets handled in OnTriggerStay()
-				//Debug.Log(connectedController.GetControllerName() + "X");
-			}
-			if(y_active) {
-				Grow();
-				Debug.Log(connectedController.GetControllerName() + "Y");
 			}
 		}
 		
@@ -167,6 +145,37 @@ public class PlayerManager : MonoBehaviour {
 		b_active = connectedController.B_CheckInput();
 		x_active = connectedController.X_CheckInput();
 		y_active = connectedController.Y_CheckInput();
+
+		if(trig_active) {
+			if(b_active && b_isEnabled) {
+				Debug.Log(connectedController.GetControllerName() + "B Trigger!");
+				B_SwapCall();
+				Y_SwapCall();
+			}
+			if(x_active && x_isEnabled) {
+				Debug.Log(connectedController.GetControllerName() + "X Trigger!");
+				X_SwapCall();
+			}
+			if(y_active && y_isEnabled) {
+				Debug.Log(connectedController.GetControllerName() + "Y Trigger!");
+				Y_SwapCall();
+				B_SwapCall();
+			}
+		}
+		else {
+			if(b_active && b_isEnabled) {
+				Shrink();
+				Debug.Log(connectedController.GetControllerName() + "B");
+			}
+			if(x_active && x_isEnabled) {
+				//Gets handled in OnTriggerStay()
+				//Debug.Log(connectedController.GetControllerName() + "X");
+			}
+			if(y_active && y_isEnabled) {
+				Grow();
+				Debug.Log(connectedController.GetControllerName() + "Y");
+			}
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
@@ -224,12 +233,15 @@ public class PlayerManager : MonoBehaviour {
 		switch(blockSize) {
 			case BlockSize.small:
 				blockSize = BlockSize.small;
+				transform.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
 				break;
 			case BlockSize.medium:
 				blockSize = BlockSize.small;
+				transform.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
 				break;
 			case BlockSize.large:
 				blockSize = BlockSize.medium;
+				transform.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
 				break;
 		}
 	}
@@ -238,12 +250,15 @@ public class PlayerManager : MonoBehaviour {
 		switch(blockSize) {
 			case BlockSize.small:
 				blockSize = BlockSize.medium;
+				transform.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
 				break;
 			case BlockSize.medium:
 				blockSize = BlockSize.large;
+				transform.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
 				break;
 			case BlockSize.large:
 				blockSize = BlockSize.large;
+				transform.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
 				break;
 		}
 	}
