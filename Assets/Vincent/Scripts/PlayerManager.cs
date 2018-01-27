@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour {
 	public bool y_active;
 	public bool trig_active;
 
-	private SwapManager swapManager;
+	public SwapManager swapManager;
 	public ControllerInput connectedController;
 
 	private GameObject A_UI;
@@ -41,6 +41,8 @@ public class PlayerManager : MonoBehaviour {
 	public bool hasItem = false;
 
 	public BlockSize blockSize = BlockSize.medium;
+
+	public Transform graphicsSlot;
 
 
 	#region Variabele Celine player manager
@@ -85,6 +87,8 @@ public class PlayerManager : MonoBehaviour {
 		Y_UI.SetActive(y_isEnabled);
 
 		pickupSlot = transform.GetChild(2);
+
+		graphicsSlot = transform.GetChild(3);
 	}
 
 	//input is handled here.
@@ -167,9 +171,10 @@ public class PlayerManager : MonoBehaviour {
 				Shrink();
 				Debug.Log(connectedController.GetControllerName() + "B");
 			}
-			if(x_active && x_isEnabled) {
+			if(x_active && x_isEnabled && hasItem) {
 				//Gets handled in OnTriggerStay()
-				//Debug.Log(connectedController.GetControllerName() + "X");
+				DropItem();
+				Debug.Log(connectedController.GetControllerName() + "X");
 			}
 			if(y_active && y_isEnabled) {
 				Grow();
@@ -188,12 +193,10 @@ public class PlayerManager : MonoBehaviour {
 
 	private void OnTriggerStay2D(Collider2D collision) {
 		if(collision.gameObject.GetComponent<IInteractable>() != null) {
-			if(x_active) {
+			if(x_active && x_isEnabled && !hasItem) {
 				//Gets handled in OnTriggerStay()
 				Debug.Log(connectedController.GetControllerName() + "X");
 				Interact(collision.gameObject.GetComponent<IInteractable>());
-			}else if(x_active && hasItem) {
-				DropItem();
 			}
 		}
 	}
@@ -213,35 +216,28 @@ public class PlayerManager : MonoBehaviour {
 		}
 	}
 
-	public void PickupItem(Transform item) {
-		swapManager.X_ButtonTransmission += DropItem;
-		hasItem = true;
-		item.parent = pickupSlot;
-		//Insert functionality here @Sten
-	}
-
-	public void DropItem() {
-		hasItem = false;
-		foreach(Transform child in pickupSlot) {
-			child.transform.parent = null;
-		}
-		swapManager.X_ButtonTransmission -= DropItem;
-	}
+	
 
 	private void Shrink() {
 		Debug.Log("Shrink!");
 		switch(blockSize) {
 			case BlockSize.small:
 				blockSize = BlockSize.small;
-				transform.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
+				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE, SMALL_SIZE);
+				groundCheck.transform.localPosition = new Vector2(0, SMALL_SIZE / -2);
 				break;
 			case BlockSize.medium:
 				blockSize = BlockSize.small;
-				transform.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
+				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE, SMALL_SIZE);
+				groundCheck.transform.localPosition = new Vector2(0, SMALL_SIZE / -2);
 				break;
 			case BlockSize.large:
 				blockSize = BlockSize.medium;
-				transform.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
+				graphicsSlot.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(MEDIUM_SIZE, MEDIUM_SIZE);
+				groundCheck.transform.localPosition = new Vector2(0, MEDIUM_SIZE / -2);
 				break;
 		}
 	}
@@ -250,20 +246,38 @@ public class PlayerManager : MonoBehaviour {
 		switch(blockSize) {
 			case BlockSize.small:
 				blockSize = BlockSize.medium;
-				transform.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
+				graphicsSlot.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(MEDIUM_SIZE, MEDIUM_SIZE);
+				groundCheck.transform.localPosition = new Vector2(0, MEDIUM_SIZE / -2);
 				break;
 			case BlockSize.medium:
 				blockSize = BlockSize.large;
-				transform.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
+				graphicsSlot.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(LARGE_SIZE, LARGE_SIZE);
+				groundCheck.transform.localPosition = new Vector2(0, LARGE_SIZE / -2);
 				break;
 			case BlockSize.large:
 				blockSize = BlockSize.large;
-				transform.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
+				graphicsSlot.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(LARGE_SIZE, LARGE_SIZE);
+				groundCheck.transform.localPosition = new Vector2(0, LARGE_SIZE / -2);
 				break;
 		}
 	}
 	private void Interact(IInteractable i) {
 		i.Act(transform);
+		hasItem = true;
+	}
+
+	public void PickupItem(Transform item) {
+		hasItem = true;
+		swapManager.PickupWeapon(item);
+		//Insert functionality here @Sten
+	}
+
+	public void DropItem() {
+		hasItem = false;
+		swapManager.DropWeapon();
 	}
 	#endregion
 

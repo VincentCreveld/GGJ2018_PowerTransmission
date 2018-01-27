@@ -23,6 +23,9 @@ public class SwapManager : MonoBehaviour {
 	//Enter button functionality
 	public TransmissionEvent Y_ButtonTransmission;
 
+	public Transform pickedUpObj;
+	public bool p1IsHolding;
+
 	private void Awake() {
 		if(instance == null)
 			instance = this;
@@ -53,6 +56,7 @@ public class SwapManager : MonoBehaviour {
 		player1.a_isEnabled = true;
 		player1.x_isEnabled = true;
 		player1.Initialize();
+		p1IsHolding = true;
 		//player1.whatIsGround = gameObject.layer;
 
 		player2.A_ButtonSwap += A_Swap;
@@ -76,10 +80,45 @@ public class SwapManager : MonoBehaviour {
 	}
 	public void X_Swap() {
 		X_ButtonTransmission();
+		SwapWeapon();
 	}
 	public void Y_Swap() {
 		Y_ButtonTransmission();
 	}
 	#endregion
 
+	public void PickupWeapon(Transform t) {
+		pickedUpObj = t;
+		if(p1IsHolding) {
+			pickedUpObj.parent = player1.pickupSlot;
+			pickedUpObj.transform.localPosition = Vector3.zero;
+		}
+		else {
+			pickedUpObj.parent = player2.pickupSlot;
+			pickedUpObj.transform.localPosition = Vector3.zero;
+		}
+	}
+
+	public void DropWeapon() {
+		Debug.Log("Reached drop");
+		pickedUpObj.transform.parent = null;
+		pickedUpObj = null;
+	}
+
+	public void SwapWeapon() {
+		if(p1IsHolding && player1.hasItem) {
+			pickedUpObj.parent = player2.pickupSlot;
+			p1IsHolding = !p1IsHolding;
+			pickedUpObj.transform.localPosition = Vector3.zero;
+			player1.hasItem = false;
+			player2.hasItem = true;
+		}
+		else if (player2.hasItem) {
+			pickedUpObj.parent = player1.pickupSlot;
+			p1IsHolding = !p1IsHolding;
+			pickedUpObj.transform.localPosition = Vector3.zero;
+			player1.hasItem = true;
+			player2.hasItem = false;
+		}
+	}
 }
