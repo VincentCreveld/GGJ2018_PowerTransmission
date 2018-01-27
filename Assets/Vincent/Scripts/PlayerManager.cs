@@ -36,6 +36,8 @@ public class PlayerManager : MonoBehaviour {
 	private GameObject X_UI;
 	private GameObject Y_UI;
 
+
+
 	//The bool has to be true when an item is held for the swpmanager to function.
 	public Transform pickupSlot;
 	public bool hasItem = false;
@@ -46,8 +48,8 @@ public class PlayerManager : MonoBehaviour {
 
 
 	#region Variabele Celine player manager
-	public float speed = 6;
-	public float jumpForce = 8;
+	public float speed = 3.5f;
+	public float jumpForce = 6.5f;
 
 	public Transform groundCheck;
 	private LayerMask whatIsGround;
@@ -257,19 +259,19 @@ public class PlayerManager : MonoBehaviour {
 			case BlockSize.small:
 				blockSize = BlockSize.small;
 				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
-				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE, SMALL_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE/2, SMALL_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, SMALL_SIZE / -2);
 				break;
 			case BlockSize.medium:
 				blockSize = BlockSize.small;
 				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
-				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE, SMALL_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE / 2, SMALL_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, SMALL_SIZE / -2);
 				break;
 			case BlockSize.large:
 				blockSize = BlockSize.medium;
 				graphicsSlot.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
-				GetComponent<BoxCollider2D>().size = new Vector2(MEDIUM_SIZE, MEDIUM_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(MEDIUM_SIZE/2, MEDIUM_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, MEDIUM_SIZE / -2);
 				break;
 		}
@@ -280,19 +282,19 @@ public class PlayerManager : MonoBehaviour {
 			case BlockSize.small:
 				blockSize = BlockSize.medium;
 				graphicsSlot.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
-				GetComponent<BoxCollider2D>().size = new Vector2(MEDIUM_SIZE, MEDIUM_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(MEDIUM_SIZE / 2, MEDIUM_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, MEDIUM_SIZE / -2);
 				break;
 			case BlockSize.medium:
 				blockSize = BlockSize.large;
 				graphicsSlot.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
-				GetComponent<BoxCollider2D>().size = new Vector2(LARGE_SIZE, LARGE_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(LARGE_SIZE/2, LARGE_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, LARGE_SIZE / -2);
 				break;
 			case BlockSize.large:
 				blockSize = BlockSize.large;
 				graphicsSlot.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
-				GetComponent<BoxCollider2D>().size = new Vector2(LARGE_SIZE, LARGE_SIZE);
+				GetComponent<BoxCollider2D>().size = new Vector2(LARGE_SIZE/2, LARGE_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, LARGE_SIZE / -2);
 				break;
 		}

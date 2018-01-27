@@ -14,8 +14,6 @@ public class MessageCenter : MonoBehaviour {
 		DontDestroyOnLoad(this);
 		if(instance == null)
 			instance = this;
-		else if(instance != this)
-			DestroyImmediate(this);
 		else
 			Debug.LogError("Can't resolve UI issues");
 
