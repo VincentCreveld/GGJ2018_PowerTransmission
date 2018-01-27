@@ -13,6 +13,7 @@ public class LeverScript : MonoBehaviour, IInteractable {
     [SerializeField]
     private float moveSpeed;
 
+    private bool isActive = false;
     private bool isAtEnd = false;
     public bool isButton = false;
 
@@ -23,6 +24,7 @@ public class LeverScript : MonoBehaviour, IInteractable {
 
 	// Use this for initialization
 	public void Act(Transform playerPos) {
+        isActive = true;
         if (!isButton) {
             MoveObject();
 
@@ -31,6 +33,7 @@ public class LeverScript : MonoBehaviour, IInteractable {
 
     public void OnTriggerEnter2D(Collider2D col) {
         if (isButton) {
+            isActive = true;
             MoveObject(); //Even checken anders een call maken in exit ook
             this.GetComponent<SpriteRenderer>().sprite = idleState;
             this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
@@ -47,7 +50,7 @@ public class LeverScript : MonoBehaviour, IInteractable {
 
     public void Update() {
         float step = moveSpeed * Time.deltaTime;
-        if (!isAtEnd) {
+        if (!isAtEnd && isActive) {
             objectToMove.transform.position = Vector3.MoveTowards(objectToMove.position, endPos.position, step);
         }else { objectToMove.transform.position = Vector3.MoveTowards(objectToMove.position, startPos.position, step); }
     }
