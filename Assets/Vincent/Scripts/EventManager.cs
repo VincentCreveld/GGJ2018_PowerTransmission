@@ -18,7 +18,9 @@ public class EventManager : MonoBehaviour {
 	}
 
 	private void DeathEvent() {
-		Debug.Log("Death");
-	}
+        LevelManager.instance.ResetLevel();
+        Debug.Log("Died");
+
+    }
 
 }
