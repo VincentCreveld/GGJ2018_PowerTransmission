@@ -12,10 +12,10 @@ public class Box : MonoBehaviour, IInteractable {
         
     }
     public void OnCollisionEnter2D(Collision2D col) {
-        if(col.gameObject.GetComponent<PlayerManager>() != null) {
-            //if(Is player large?) 
-            this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;//RigidbodyConstraints2D.FreezePositionX;
-            //else{this.getcomponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreePositionX}
+        if (col.gameObject.GetComponent<PlayerManager>() != null) {
+            if (col.gameObject.GetComponent<PlayerManager>().blockSize == BlockSize.large) {
+                this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None; }
+            else { this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX; }
+            }
         }
     }
-}
