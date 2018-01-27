@@ -57,7 +57,7 @@ public class SwapManager : MonoBehaviour {
 		player1.a_isEnabled = true;
 		player1.x_isEnabled = true;
 		player1.Initialize();
-		p1IsHolding = false;
+		p1IsHolding = true;
 		//player1.whatIsGround = gameObject.layer;
 
 		player2.A_ButtonSwap += A_Swap;

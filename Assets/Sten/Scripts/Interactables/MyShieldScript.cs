@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AxeScript : MonoBehaviour, IInteractable {
+public class MyShieldScript : MonoBehaviour, IInteractable {
 
     private Vector3 initialPos;
 
@@ -18,10 +18,9 @@ public class AxeScript : MonoBehaviour, IInteractable {
     }
 
     public void Act(Transform playerPos) {
-        Debug.Log("Picked up Axe!");
+        Debug.Log("Picked up shield!");
         playerPos.gameObject.GetComponent<PlayerManager>().hasItem = true;
         this.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
         playerPos.GetComponent<PlayerManager>().swapManager.PickupWeapon(transform);
     }
-
 }
