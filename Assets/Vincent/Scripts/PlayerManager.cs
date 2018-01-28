@@ -46,6 +46,7 @@ public class PlayerManager : MonoBehaviour {
     private Animator X_Animator;
     private Animator Y_Animator;
 
+	private Animator charAnimation;
 
     //The bool has to be true when an item is held for the swpmanager to function.
     public Transform pickupSlot;
@@ -78,6 +79,7 @@ public class PlayerManager : MonoBehaviour {
 	#endregion
 
 	public void Initialize() {
+
 		swapManager = SwapManager.instance;
 
 		SubscribeFunctionality();
@@ -118,8 +120,8 @@ public class PlayerManager : MonoBehaviour {
         pickupSlot = transform.GetChild(2);
 
 		graphicsSlot = transform.GetChild(3);
-
-        audioManager = FindObjectOfType<AudioManager>();
+		charAnimation = graphicsSlot.GetChild(0).GetComponent<Animator>();
+		audioManager = FindObjectOfType<AudioManager>();
 	}
 
 	//input is handled here.
@@ -145,6 +147,8 @@ public class PlayerManager : MonoBehaviour {
 		moveHorizontal = (Input.GetAxis(connectedController.GetHorizontal()));
 		if(grounded) {
 			rigidBody2D.velocity = new Vector2(moveHorizontal * speed, rigidBody2D.velocity.y);
+			charAnimation.SetBool("PlayerWalk", true);
+			charAnimation.SetBool("StoodStill", false);
 		}
 		else {
 			// If player turns mid-jump
@@ -156,7 +160,15 @@ public class PlayerManager : MonoBehaviour {
 			}
 		}
 
-		if(moveHorizontal < -.19) {
+		if(moveHorizontal > -.07 && moveHorizontal < .07) {
+			charAnimation.SetBool("PlayerWalk", false);
+		}
+
+		if(Input.GetAxisRaw(connectedController.GetHorizontal()) == 0) {
+			charAnimation.SetBool("StoodStill", true);
+		}
+
+		if(moveHorizontal < -.25) {
 			
 			if(graphicsSlot.localScale.x > 0) {
 
@@ -166,7 +178,7 @@ public class PlayerManager : MonoBehaviour {
 				pickupSlot.localPosition = new Vector3(-pickupSlot.localPosition.x, pickupSlot.localPosition.y, pickupSlot.localPosition.z);
 			}
 		}
-		if (moveHorizontal > .19)
+		if (moveHorizontal > .25)
         {
 			
 			if(graphicsSlot.localScale.x < 0) {
@@ -191,6 +203,7 @@ public class PlayerManager : MonoBehaviour {
 		// CLIMBING
 		moveVertical = (Input.GetAxis(connectedController.GetVertical()));
 		if(climbable) {
+			charAnimation.SetBool("PlayerWalk", false);
 			if(!grounded)
 				rigidBody2D.velocity = new Vector2(moveHorizontal * speed / 3, moveVertical * speed);
 			else
@@ -215,11 +228,19 @@ public class PlayerManager : MonoBehaviour {
 		y_active = connectedController.Y_CheckInput();
 
 		if(trig_active) {
-            A_Animator.SetBool("leftTrigger", true);
-            B_Animator.SetBool("leftTrigger", true);
-            X_Animator.SetBool("leftTrigger", true);
-            Y_Animator.SetBool("leftTrigger", true);
-            if (b_active && b_isEnabled) {
+			if(A_Animator.gameObject.activeSelf)
+				A_Animator.SetBool("leftTrigger", true);
+			if(B_Animator.gameObject.activeSelf)
+				B_Animator.SetBool("leftTrigger", true);
+			if(X_Animator.gameObject.activeSelf)
+				X_Animator.SetBool("leftTrigger", true);
+			if(Y_Animator.gameObject.activeSelf)
+				Y_Animator.SetBool("leftTrigger", true);
+			if(a_active && a_isEnabled) {
+				Debug.Log(connectedController.GetControllerName() + "A Trigger!");
+				A_SwapCall();
+			}
+			if (b_active && b_isEnabled) {
 				Debug.Log(connectedController.GetControllerName() + "B Trigger!");
 				B_SwapCall();
 				Y_SwapCall();
@@ -236,10 +257,14 @@ public class PlayerManager : MonoBehaviour {
             }
         }
 		else {
-            A_Animator.SetBool("leftTrigger", false);
-            B_Animator.SetBool("leftTrigger", false);
-            X_Animator.SetBool("leftTrigger", false);
-            Y_Animator.SetBool("leftTrigger", false);
+			if(A_Animator.gameObject.activeSelf)
+				A_Animator.SetBool("leftTrigger", false);
+			if(B_Animator.gameObject.activeSelf)
+				B_Animator.SetBool("leftTrigger", false);
+			if(X_Animator.gameObject.activeSelf)
+				X_Animator.SetBool("leftTrigger", false);
+			if(Y_Animator.gameObject.activeSelf)
+				Y_Animator.SetBool("leftTrigger", false);
 
             if (b_active && b_isEnabled) {
 				Shrink();
@@ -304,6 +329,7 @@ public class PlayerManager : MonoBehaviour {
 
 	private void Jump() {
 		if(grounded) {
+			charAnimation.SetTrigger("PlayerJump");
 			rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpForce);
 			tempMove = moveHorizontal;
 		}

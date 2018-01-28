@@ -40,7 +40,6 @@ public class SwapManager : MonoBehaviour {
 		SetupPlayerManagers();
         p1StartPos = LevelManager.instance.SetPlayer1Pos();
         p2StartPos = LevelManager.instance.SetPlayer2Pos();
-
     }
 
 
@@ -65,7 +64,6 @@ public class SwapManager : MonoBehaviour {
 		player2.B_ButtonSwap += B_Swap;
 		player2.X_ButtonSwap += X_Swap;
 		player2.Y_ButtonSwap += Y_Swap;
-		player2.a_isEnabled = true;
 		player2.b_isEnabled = true;
 		player2.y_isEnabled = true;
 		player2.Initialize();
