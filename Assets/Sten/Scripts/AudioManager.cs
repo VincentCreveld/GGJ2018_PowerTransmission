@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum musicTrack { gameSound = 0 };
 public enum environmentalSound { ambience = 0 };
-public enum uiSounds { cameraSwitch = 0, openMenu, callSwitch, textOpen, textCloses,  };
+public enum uiSounds { cameraSwitch1 = 0, cameraSwitch2  };
 public enum interactionSounds { chopTree1 = 0, chopTree2, pushBox, fallBox, grow1, grow2, grow3, enterLever, exitLever,
-                                dropSword1, dropSword2, pickUp, shrick1, shrink2, shrink3 };
+                                dropSword1, dropSword2, pickUp, shrink1, shrink2, shrink3 };
 
 public class AudioManager : MonoBehaviour {
 
@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour {
             musicTracks.clip = musicList[(int)song];
             musicTracks.Play();
             musicTracks.loop = true;
-            musicTracks.volume = 0.8f;
+            musicTracks.volume = 0.5f;
 
         }
         else {
@@ -101,6 +101,10 @@ public class AudioManager : MonoBehaviour {
     
     //Interaction Sounds
     public AudioSource interactionSound(interactionSounds sound) {
+
+        interactionSounds.clip = interactionSoundsList[(int)sound];
+        interactionSounds.Play();
+        /*
         if (!interactionSounds.isPlaying) {
             interactionSounds.clip = interactionSoundsList[(int)sound];
             interactionSounds.Play();
@@ -108,13 +112,16 @@ public class AudioManager : MonoBehaviour {
         else {
             StartCoroutine(waitForInteractionSound(sound));
         }
+        */
         return interactionSounds;
     }
+    /*
     IEnumerator waitForInteractionSound(interactionSounds sound) {
         yield return new WaitWhile(() => interactionSounds.isPlaying);
         interactionSounds.clip = interactionSoundsList[(int)sound];
         interactionSounds.Play();
     }
+    */
 
     public AudioSource playTransitionSound() {
         transitionSoundSource.Play();

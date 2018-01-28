@@ -347,19 +347,36 @@ public class PlayerManager : MonoBehaviour {
 				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE/2, SMALL_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, SMALL_SIZE / -2);
+
                 break;
 			case BlockSize.medium:
 				blockSize = BlockSize.small;
 				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE / 2, SMALL_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, SMALL_SIZE / -2);
-				break;
+
+                if (random == 0)
+                    audioManager.interactionSound(interactionSounds.shrink1);
+                else if (random == 1)
+                    audioManager.interactionSound(interactionSounds.shrink2);
+                else
+                    audioManager.interactionSound(interactionSounds.shrink3);
+
+                break;
 			case BlockSize.large:
 				blockSize = BlockSize.medium;
 				graphicsSlot.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(MEDIUM_SIZE/2, MEDIUM_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, MEDIUM_SIZE / -2);
-				break;
+
+                if (random == 0)
+                    audioManager.interactionSound(interactionSounds.shrink1);
+                else if (random == 1)
+                    audioManager.interactionSound(interactionSounds.shrink2);
+                else
+                    audioManager.interactionSound(interactionSounds.shrink3);
+
+                break;
 		}
 	}
 	private void Grow() {
@@ -377,7 +394,7 @@ public class PlayerManager : MonoBehaviour {
                     audioManager.interactionSound(interactionSounds.grow1);
                 else if (random == 1)
                     audioManager.interactionSound(interactionSounds.grow2);
-                else if (random == 2)
+                else
                     audioManager.interactionSound(interactionSounds.grow3);
                 
                 break;
@@ -391,7 +408,7 @@ public class PlayerManager : MonoBehaviour {
                     audioManager.interactionSound(interactionSounds.grow1);
                 else if (random == 1)
                     audioManager.interactionSound(interactionSounds.grow2);
-                else if (random == 2)
+                else
                     audioManager.interactionSound(interactionSounds.grow3);
 
                 break;
@@ -400,13 +417,6 @@ public class PlayerManager : MonoBehaviour {
 				graphicsSlot.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(LARGE_SIZE/2, LARGE_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, LARGE_SIZE / -2);
-
-                if (random == 0)
-                    audioManager.interactionSound(interactionSounds.grow1);
-                else if (random == 1)
-                    audioManager.interactionSound(interactionSounds.grow2);
-                else if (random == 2)
-                    audioManager.interactionSound(interactionSounds.grow3);
 
                 break;
 		}
@@ -420,8 +430,9 @@ public class PlayerManager : MonoBehaviour {
 	public void PickupItem(Transform item) {
 		hasItem = true;
 		swapManager.PickupWeapon(item);
-		//Insert functionality here @Sten
-	}
+
+        //Insert functionality here @Sten
+    }
 
 	public void DropItem() {
 		hasItem = false;

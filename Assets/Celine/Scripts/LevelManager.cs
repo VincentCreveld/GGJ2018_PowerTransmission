@@ -41,6 +41,7 @@ public class LevelManager : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
 
         audioManager.soundTrack(musicTrack.gameSound);
+        audioManager.ambianceSoundTrack(environmentalSound.ambience);
 
         player1 = SwapManager.instance.objPlayer1;
         player2 = SwapManager.instance.objPlayer2;
@@ -48,17 +49,32 @@ public class LevelManager : MonoBehaviour
         GetStartPositions();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LevelUp();
+            Debug.Log("Move up!");
+        }
+    }
+
     public void LevelUp() {
         // Get the new reset positions for the player
         GetStartPositions();
         Debug.Log("Got sets");
+
         // Move the camera up to the new level
-        
-            moveCamera.MoveUp();
-            audioManager.uiSoundTrack(uiSounds.cameraSwitch);
-            level = currentLevel + 1;
-            SetPositions();
-            Debug.Log("This is level " + level);
+        moveCamera.MoveUp();
+
+        int random = Random.Range(0, 2);
+        if (random == 0)
+            audioManager.uiSoundTrack(uiSounds.cameraSwitch1);
+        else
+            audioManager.uiSoundTrack(uiSounds.cameraSwitch2);
+
+        level = currentLevel + 1;
+        SetPositions();
+        Debug.Log("This is level " + level);
         
     }
 
