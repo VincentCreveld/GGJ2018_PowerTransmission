@@ -38,9 +38,10 @@ public class SwapManager : MonoBehaviour {
 
 	private void Start() {
 		SetupPlayerManagers();
-		p1StartPos = player1.transform.position;
-		p2StartPos = player2.transform.position;
-	}
+        p1StartPos = LevelManager.instance.SetPlayer1Pos();
+        p2StartPos = LevelManager.instance.SetPlayer2Pos();
+
+    }
 
 
 	private void SetupPlayerManagers() {
