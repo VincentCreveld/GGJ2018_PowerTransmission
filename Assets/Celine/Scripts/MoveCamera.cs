@@ -14,7 +14,7 @@ public class MoveCamera : MonoBehaviour
 
     public void MoveUp()
     {
-        switch (index)
+        switch (LevelManager.instance.currentLevel)
         {
             case 1:
                 anim.SetTrigger("moveUp1");

@@ -12,10 +12,25 @@ public class MessageCenter : MonoBehaviour {
 
 	private void Awake() {
 		DontDestroyOnLoad(this);
-		if(instance == null)
-			instance = this;
-		else
-			Debug.LogError("Can't resolve UI issues");
+        if (instance == null)
+            instance = this;
+        else {
+            Destroy(this.gameObject);
+            Debug.LogError("Can't resolve UI issues");
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
 
 		messageCanvas = GetComponent<Canvas>();
 	}
