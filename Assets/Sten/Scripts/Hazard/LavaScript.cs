@@ -17,8 +17,9 @@ public class LavaScript : MonoBehaviour {
         if (hit.collider != null) {
             if (hit.collider.gameObject.GetComponent<MyShieldScript>() != null) {
                 Debug.Log("Shielded");
-                lavaSmall.SetActive(false);
-                lavaBig.SetActive(true);
+                lavaSmall.SetActive(true);
+                lavaBig.SetActive(false);
+                lavaBig.GetComponent<Animator>().enabled = false;
                 //block lava stream yall
             }
             else if (hit.collider.gameObject.GetComponent<PlayerManager>() != null) {
@@ -26,8 +27,9 @@ public class LavaScript : MonoBehaviour {
             }
             //spew lava stream
         }else {
-            lavaSmall.SetActive(true);
-            lavaBig.SetActive(false);
+            lavaSmall.SetActive(false);
+            lavaBig.GetComponent<Animator>().enabled = true;
+            lavaBig.SetActive(true);
         }
     }
     }

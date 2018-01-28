@@ -64,6 +64,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Got sets");
 
         // Move the camera up to the new level
+        level  = currentLevel + 1;
         moveCamera.MoveUp();
 
         int random = Random.Range(0, 2);
@@ -72,7 +73,7 @@ public class LevelManager : MonoBehaviour
         else
             audioManager.uiSoundTrack(uiSounds.cameraSwitch2);
 
-        level = currentLevel + 1;
+
         SetPositions();
         Debug.Log("This is level " + level);
         

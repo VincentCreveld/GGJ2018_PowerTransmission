@@ -7,26 +7,23 @@ public class DoorScript : MonoBehaviour, IInteractable {
 
 	public bool playerPresent = false;
 	public bool playerCanProceed = false;
-
-	public Color red = Color.red;
-	public Color green = Color.green;
-
-	//public Texture2D light = new Texture2D(1, 1);
-	public Image image;
+    [SerializeField]
+    private Animator doorLight;
     
     private AudioManager audioManager;
 
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
+
     }
 
     private void LateUpdate() {
-		if(playerPresent)
-			image.color = green;
-		else
-			image.color = red;
-	}
+        if (playerPresent)
+            doorLight.SetBool("LightOn", true);
+        else
+            doorLight.SetBool("LightOn", false);
+    }
 
 	public void Act(Transform t) {
         if (playerCanProceed)
@@ -55,9 +52,13 @@ public class DoorScript : MonoBehaviour, IInteractable {
 
                 default:
                     break;
+
+                    
             }
+            
 
             LevelManager.instance.LevelUp();
+            playerCanProceed = false;
 
         }
 
