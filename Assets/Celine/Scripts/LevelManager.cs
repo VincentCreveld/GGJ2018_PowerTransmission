@@ -10,8 +10,8 @@ public class LevelManager : MonoBehaviour
     private MoveCamera moveCamera;
     private AudioManager audioManager;
 
-    private int level = 1;
-    private int currentLevel;
+    public int level = 1;
+    public int currentLevel;
 
     private GameObject player1;
     private GameObject player2;
