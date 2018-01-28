@@ -55,6 +55,8 @@ public class PlayerManager : MonoBehaviour {
 
 	public Transform graphicsSlot;
 
+    private AudioManager audioManager;
+
 
 	#region Variabele Celine player manager
 	public float speed = 3.5f;
@@ -116,6 +118,8 @@ public class PlayerManager : MonoBehaviour {
         pickupSlot = transform.GetChild(2);
 
 		graphicsSlot = transform.GetChild(3);
+
+        audioManager = FindObjectOfType<AudioManager>();
 	}
 
 	//input is handled here.
@@ -309,13 +313,15 @@ public class PlayerManager : MonoBehaviour {
 
 	private void Shrink() {
 		Debug.Log("Shrink!");
-		switch(blockSize) {
+
+        int random = Random.Range(0, 3);
+        switch (blockSize) {
 			case BlockSize.small:
 				blockSize = BlockSize.small;
 				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE/2, SMALL_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, SMALL_SIZE / -2);
-				break;
+                break;
 			case BlockSize.medium:
 				blockSize = BlockSize.small;
 				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
@@ -332,25 +338,51 @@ public class PlayerManager : MonoBehaviour {
 	}
 	private void Grow() {
 		Debug.Log("Grow!");
+
+        int random = Random.Range(0, 3);
 		switch(blockSize) {
 			case BlockSize.small:
 				blockSize = BlockSize.medium;
 				graphicsSlot.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(MEDIUM_SIZE / 2, MEDIUM_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, MEDIUM_SIZE / -2);
-				break;
+
+                if (random == 0)
+                    audioManager.interactionSound(interactionSounds.grow1);
+                else if (random == 1)
+                    audioManager.interactionSound(interactionSounds.grow2);
+                else if (random == 2)
+                    audioManager.interactionSound(interactionSounds.grow3);
+                
+                break;
 			case BlockSize.medium:
 				blockSize = BlockSize.large;
 				graphicsSlot.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(LARGE_SIZE/2, LARGE_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, LARGE_SIZE / -2);
-				break;
+
+                if (random == 0)
+                    audioManager.interactionSound(interactionSounds.grow1);
+                else if (random == 1)
+                    audioManager.interactionSound(interactionSounds.grow2);
+                else if (random == 2)
+                    audioManager.interactionSound(interactionSounds.grow3);
+
+                break;
 			case BlockSize.large:
 				blockSize = BlockSize.large;
 				graphicsSlot.localScale = new Vector3(LARGE_SIZE, LARGE_SIZE, LARGE_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(LARGE_SIZE/2, LARGE_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, LARGE_SIZE / -2);
-				break;
+
+                if (random == 0)
+                    audioManager.interactionSound(interactionSounds.grow1);
+                else if (random == 1)
+                    audioManager.interactionSound(interactionSounds.grow2);
+                else if (random == 2)
+                    audioManager.interactionSound(interactionSounds.grow3);
+
+                break;
 		}
 	}
 	private void Interact(IInteractable i) {

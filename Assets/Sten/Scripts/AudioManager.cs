@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum musicTrack { gameSound = 0 };
-public enum environmentalSound { };
+public enum environmentalSound { ambience = 0 };
 public enum uiSounds { cameraSwitch = 0, openMenu, callSwitch, textOpen, textCloses,  };
-public enum interactionSounds {pickupSound=0,woodDropSound, stoneDropSound,glassDropSound,steelDropSound};
+public enum interactionSounds { chopTree1 = 0, chopTree2, pushBox, fallBox, grow1, grow2, grow3, enterLever, exitLever,
+                                dropSword1, dropSword2, pickUp, shrick1, shrink2, shrink3 };
 
 public class AudioManager : MonoBehaviour {
 
@@ -67,6 +68,7 @@ public class AudioManager : MonoBehaviour {
         if (!environmentalSounds.isPlaying) {
             environmentalSounds.clip = environmentalSoundList[(int)sound];
             environmentalSounds.Play();
+            environmentalSounds.loop = true;
         }
         else {
             StartCoroutine(waitForEnvironmentalTrack(sound));

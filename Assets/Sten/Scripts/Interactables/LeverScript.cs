@@ -22,8 +22,15 @@ public class LeverScript : MonoBehaviour, IInteractable {
     [SerializeField]
     private Sprite interactedState;
 
-	// Use this for initialization
-	public void Act(Transform playerPos) {
+    private AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+
+    // Use this for initialization
+    public void Act(Transform playerPos) {
         isActive = true;
         if (!isButton) {
             MoveObject();
@@ -37,6 +44,7 @@ public class LeverScript : MonoBehaviour, IInteractable {
             MoveObject(); //Even checken anders een call maken in exit ook
             this.GetComponent<SpriteRenderer>().sprite = idleState;
             this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
+            audioManager.interactionSound(interactionSounds.enterLever);
         }
     }
     public void OnTriggerExit2D(Collider2D col) {
@@ -44,6 +52,7 @@ public class LeverScript : MonoBehaviour, IInteractable {
             isAtEnd = true;
             this.GetComponent<SpriteRenderer>().sprite = interactedState;
             this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
+            audioManager.interactionSound(interactionSounds.exitLever);
         }
     }
 

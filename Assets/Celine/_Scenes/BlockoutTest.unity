@@ -51717,11 +51717,31 @@ MonoBehaviour:
   transitionSoundSource: {fileID: 1538838906}
   musicList:
   - {fileID: 8300000, guid: 6f1575569aaf8b043a239cdab8fe13cd, type: 3}
-  environmentalSoundList: []
+  environmentalSoundList:
+  - {fileID: 8300000, guid: 5d9488d611cfedb4a9433e914189b720, type: 3}
   uiList:
-  - {fileID: 8300000, guid: 6b0fb0840a5372f43af28f7bc940628e, type: 3}
-  interactionSoundsList: []
-  transitionSound: []
+  - {fileID: 8300000, guid: 7ad5e01b0479f2b42bd32731c31ed865, type: 3}
+  - {fileID: 8300000, guid: de1792eaaad3f2049a5aa6c89f6c03b4, type: 3}
+  interactionSoundsList:
+  - {fileID: 8300000, guid: 5eca4bb746bd30a44b7f38eff2e69f99, type: 3}
+  - {fileID: 8300000, guid: 13c3eef24e8dacd45b00d7c995d1271b, type: 3}
+  - {fileID: 8300000, guid: c6ecec38e0417934f8a26f791210989d, type: 3}
+  - {fileID: 8300000, guid: 489e06fe57049714285ff344a08b49e3, type: 3}
+  - {fileID: 8300000, guid: ae2838ea9a346c3458dc6d971fc6b9d0, type: 3}
+  - {fileID: 8300000, guid: 8b08507f991b64a46b12d311bf0a769a, type: 3}
+  - {fileID: 8300000, guid: 26d98d706521d0342acf400e43dba0df, type: 3}
+  - {fileID: 8300000, guid: 6efd765af04d9ae4aaba7721899fa359, type: 3}
+  - {fileID: 8300000, guid: 8a4403a2713fd8746b5b4a99b7691819, type: 3}
+  - {fileID: 8300000, guid: caf71228683c1f9458ed265aa8e136a1, type: 3}
+  - {fileID: 8300000, guid: fb36a18dbca8846479ab625ebe3ec39e, type: 3}
+  - {fileID: 8300000, guid: 2996e286b3c59d740b6b2665f3344f24, type: 3}
+  - {fileID: 8300000, guid: 2493be3f0e798eb4ea254f08e0ae72d3, type: 3}
+  - {fileID: 8300000, guid: 885a04100a4b6bc44a771b9aeb196eb8, type: 3}
+  - {fileID: 8300000, guid: 48aeac8e43618474c9ecba4287c23fdd, type: 3}
+  transitionSound:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1538838911
 Transform:
   m_ObjectHideFlags: 0
