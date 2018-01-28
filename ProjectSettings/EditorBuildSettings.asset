@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/Sten/StartScene.unity
     guid: d8b7cd576c518734db547c403ae07074
   - enabled: 1
-    path: Assets/Vincent/Scenes/PlayerMovementTest 1.unity
+    path: Assets/Vincent/Scenes/PlayerMovementTestOld.unity
     guid: 3b18ee87e853fed41b41e2acc42ebc5e
+  - enabled: 1
+    path: Assets/Sten/Prototype2.unity
+    guid: 9ad23df7af894504cb14b6c781cf0ef1

@@ -8,13 +8,24 @@ public class EventManager : MonoBehaviour {
 	public ManagerEvent playerDeath;
 	public int deathCount;
 
-	private void Awake() {
-		if(instance == null)
-			instance = this;
-		else
-			Debug.LogError("More than one eventmanager in scene.");
+	private void Start() {
+        if (instance == null)
+            instance = this;
+        else {
+            Destroy(this.gameObject);
+            Debug.LogError("More than one eventmanager in scene.");
+        }
 
-		playerDeath += PlayerDeath;
+        /*if (instance == null)
+            instance = this;
+        else {
+            Destroy(this.gameObject);
+            Debug.LogError("More than one levelmanager in scene.");
+        }*/
+
+
+
+        playerDeath += PlayerDeath;
 	}
 
 	private void DeathEvent() {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LevelManager : MonoBehaviour
     private AudioManager audioManager;
 
     private int level = 1;
+    private int currentLevel;
 
     private GameObject player1;
     private GameObject player2;
@@ -20,12 +22,18 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private List<Transform> player2SpawnPositions = new List<Transform>();
 
+    public void awake() {
+    }
+
     public void Start()
     {
+        DontDestroyOnLoad(this);
         if (instance == null)
             instance = this;
-        else
+        else {
+            Destroy(this.gameObject);
             Debug.LogError("More than one levelmanager in scene.");
+        }
 
         Debug.Log("This is level " + level);
 
@@ -40,17 +48,18 @@ public class LevelManager : MonoBehaviour
         GetStartPositions();
     }
 
-    public void LevelUp()
-    {
+    public void LevelUp() {
         // Get the new reset positions for the player
         GetStartPositions();
-
+        Debug.Log("Got sets");
         // Move the camera up to the new level
-        moveCamera.MoveUp();
-        audioManager.uiSoundTrack(uiSounds.cameraSwitch);
-        level++;
-        SetPositions();
-        Debug.Log("This is level " + level);
+        
+            moveCamera.MoveUp();
+            audioManager.uiSoundTrack(uiSounds.cameraSwitch);
+            level = currentLevel + 1;
+            SetPositions();
+            Debug.Log("This is level " + level);
+        
     }
 
     // Get positions for the players to go back to when someone dies
@@ -63,6 +72,7 @@ public class LevelManager : MonoBehaviour
     // Reset player positions
     public void ResetLevel()
     {
+        SceneManager.LoadScene("Prototype2");
         player1.transform.position = startPosPlayer1;
         player2.transform.position = startPosPlayer2;
     }
@@ -70,6 +80,7 @@ public class LevelManager : MonoBehaviour
     public void SetPositions() {
         player1.transform.position = player1SpawnPositions[level].position;
         player2.transform.position = player2SpawnPositions[level].position;
+        currentLevel = level;
     }
 
     public Vector2 SetPlayer1Pos() {
