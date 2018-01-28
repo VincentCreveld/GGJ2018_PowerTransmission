@@ -7,8 +7,14 @@ public class DoorHandler : MonoBehaviour {
 	public DoorScript doorP1;
 	public DoorScript doorP2;
 
+    private AudioManager audioManager;
 
-	private void LateUpdate() {
+    private void Start()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+
+    private void LateUpdate() {
 		if(doorP1.playerPresent && doorP2.playerPresent) {
 			doorP1.playerCanProceed = true;
 			doorP2.playerCanProceed = true;
