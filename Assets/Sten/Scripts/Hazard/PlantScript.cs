@@ -13,17 +13,23 @@ public class PlantScript : MonoBehaviour {
     [SerializeField]
     private float animationTime;
 
+    private bool isAlive = true;
+
+
 	public void OnCollisionEnter2D(Collision2D col) {
         if(col.gameObject.GetComponent<PlayerManager>() != null) {
                 EventManager.instance.playerDeath();
         }else {
-            if (col.gameObject.GetComponent<SwordScript>() != null) {
+            if (col.gameObject.GetComponent<SwordScript>() != null && isAlive) {
                 StartCoroutine(DiePlant());
             }
         }
         }
 
     IEnumerator DiePlant() {
+        Debug.Log("Plant dying");
+        isAlive = false;
+        Destroy(this.GetComponent<Animator>());
         this.gameObject.GetComponent<Collider2D>().enabled = false;
         this.GetComponent<SpriteRenderer>().sprite = plantDeath1;
         this.GetComponent<SpriteRenderer>().sprite.texture.Apply();

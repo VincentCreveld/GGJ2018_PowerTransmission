@@ -15,12 +15,16 @@ public class SwordScript : MonoBehaviour, IInteractable {
 		transform.parent = null;
 		transform.position = initialPos;
 		this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
-	}
+        this.gameObject.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+    }
 
 	public void Act (Transform playerPos) {
         Debug.Log("Picked up sword!");
         playerPos.gameObject.GetComponent<PlayerManager>().hasItem = true;
+
         this.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+        this.gameObject.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
+
         playerPos.GetComponent<PlayerManager>().swapManager.PickupWeapon(transform);
     }
 	

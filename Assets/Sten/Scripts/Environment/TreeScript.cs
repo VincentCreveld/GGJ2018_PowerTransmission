@@ -21,6 +21,7 @@ public class TreeScript : MonoBehaviour {
     }
 
     public void OnCollisionEnter2D(Collision2D col) {
+        Debug.Log("COLLTREE");
        if (col.gameObject.GetComponent<AxeScript>() != null) {
             StartCoroutine(DieTree());
          }        

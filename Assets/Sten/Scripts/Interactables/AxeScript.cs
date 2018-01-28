@@ -19,6 +19,7 @@ public class AxeScript : MonoBehaviour, IInteractable {
         transform.parent = null;
         transform.position = initialPos;
         this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        this.gameObject.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
 
         int random = Random.Range(0, 2);
         if (random == 0)
@@ -31,6 +32,7 @@ public class AxeScript : MonoBehaviour, IInteractable {
         Debug.Log("Picked up Axe!");
         playerPos.gameObject.GetComponent<PlayerManager>().hasItem = true;
         this.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+        this.gameObject.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
         playerPos.GetComponent<PlayerManager>().swapManager.PickupWeapon(transform);
         audioManager.interactionSound(interactionSounds.pickUp);
     }
