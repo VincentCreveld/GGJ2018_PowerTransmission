@@ -36,7 +36,12 @@ public class SwapManager : MonoBehaviour {
 			Application.Quit();
 	}
 
-	private void Start() {
+    public void Start() {
+        Initialize();
+
+        }
+
+	public void Initialize() {
 		SetupPlayerManagers();
         p1StartPos = LevelManager.instance.SetPlayer1Pos();
         p2StartPos = LevelManager.instance.SetPlayer2Pos();
@@ -44,12 +49,14 @@ public class SwapManager : MonoBehaviour {
 
 
 	private void SetupPlayerManagers() {
-		player1 = objPlayer1.AddComponent<PlayerManager>();
-		player1.connectedController = new Joystick1();
-
-		player2 = objPlayer2.AddComponent<PlayerManager>();
-		player2.connectedController = new Joystick2();
-
+        if (objPlayer1.GetComponent<PlayerManager>() == null) {
+            player1 = objPlayer1.AddComponent<PlayerManager>();
+            player1.connectedController = new Joystick1();
+            }
+        if (objPlayer2.GetComponent<PlayerManager>() == null) {
+            player2 = objPlayer2.AddComponent<PlayerManager>();
+            player2.connectedController = new Joystick2();
+            }
 		player1.A_ButtonSwap += A_Swap;
 		player1.B_ButtonSwap += B_Swap;
 		player1.X_ButtonSwap += X_Swap;

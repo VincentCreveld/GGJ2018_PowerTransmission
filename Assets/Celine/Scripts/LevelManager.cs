@@ -22,9 +22,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private List<Transform> player2SpawnPositions = new List<Transform>();
 
-    public void awake() {
-    }
-
     public void Start()
     {
         DontDestroyOnLoad(this);
@@ -92,7 +89,8 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene("Prototype2");
         player1.transform.position = startPosPlayer1;
         player2.transform.position = startPosPlayer2;
-    }
+        SwapManager.instance.Initialize();
+        }
 
     public void SetPositions() {
         player1.transform.position = player1SpawnPositions[level].position;
