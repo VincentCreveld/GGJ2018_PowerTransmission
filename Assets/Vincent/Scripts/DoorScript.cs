@@ -58,6 +58,7 @@ public class DoorScript : MonoBehaviour, IInteractable {
             
 
             LevelManager.instance.LevelUp();
+			SwapManager.instance.p1IsHolding = true;
             playerCanProceed = false;
 
         }
