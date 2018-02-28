@@ -26,6 +26,7 @@ public class DoorScript : MonoBehaviour, IInteractable {
     }
 
 	public void Act(Transform t) {
+        //LevelManager.instance.Initialize();
         if (playerCanProceed)
         {
             switch (LevelManager.instance.currentLevel)

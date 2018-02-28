@@ -39950,6 +39950,8 @@ MonoBehaviour:
   environmentalSounds: {fileID: 1365160178}
   uiSounds: {fileID: 1365160177}
   interactionSounds: {fileID: 1365160176}
+  SFX2: {fileID: 0}
+  SFX3: {fileID: 0}
   transitionSoundSource: {fileID: 1365160176}
   musicList:
   - {fileID: 8300000, guid: f6cab059b43f7bc4094a6cec4061624a, type: 3}
@@ -52874,6 +52876,7 @@ GameObject:
   - component: {fileID: 1773065063}
   - component: {fileID: 1773065062}
   - component: {fileID: 1773065061}
+  - component: {fileID: 1773065066}
   m_Layer: 5
   m_Name: __MESSAGE_CENTER__
   m_TagString: Untagged
@@ -52974,6 +52977,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1773065066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1773065060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bf725e0df4b8e14b9528d8f0f08a186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1SpawnPositions:
+  - {fileID: 65865011}
+  - {fileID: 65865011}
+  - {fileID: 1869210254}
+  - {fileID: 1324181188}
+  - {fileID: 1324181188}
+  - {fileID: 143035563}
+  - {fileID: 0}
+  player2SpawnPositions:
+  - {fileID: 1873651928}
+  - {fileID: 1873651928}
+  - {fileID: 303372694}
+  - {fileID: 796552369}
+  - {fileID: 766471091}
+  - {fileID: 383262772}
+  - {fileID: 0}
 --- !u!1 &1774140242
 GameObject:
   m_ObjectHideFlags: 0

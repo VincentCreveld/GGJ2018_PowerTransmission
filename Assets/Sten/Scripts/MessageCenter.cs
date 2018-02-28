@@ -12,7 +12,7 @@ public class MessageCenter : MonoBehaviour {
     public GameObject uiImage;
 
 	private void Awake() {
-		DontDestroyOnLoad(this);
+		//DontDestroyOnLoad(this);
         if (instance == null)
             instance = this;
         else {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -20714,6 +20714,38 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &794093084 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1126673464148708, guid: c104917d8d73abb4e8670f5d7d3c4330,
+    type: 2}
+  m_PrefabInternal: {fileID: 947174510}
+--- !u!114 &794093085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 794093084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bf725e0df4b8e14b9528d8f0f08a186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1SpawnPositions:
+  - {fileID: 65865011}
+  - {fileID: 65865011}
+  - {fileID: 204934848}
+  - {fileID: 827131393}
+  - {fileID: 1834498595}
+  - {fileID: 1567318985}
+  - {fileID: 119314952}
+  player2SpawnPositions:
+  - {fileID: 1873651928}
+  - {fileID: 1873651928}
+  - {fileID: 1667160840}
+  - {fileID: 204609398}
+  - {fileID: 1734135728}
+  - {fileID: 157324066}
+  - {fileID: 1383671303}
 --- !u!1 &797302866
 GameObject:
   m_ObjectHideFlags: 0
@@ -21549,12 +21581,12 @@ Prefab:
     - target: {fileID: 61347684763487762, guid: 47eb07b19a1942241ba3f9215b69c642,
         type: 2}
       propertyPath: m_Offset.x
-      value: 0.016406074
+      value: -0.01195837
       objectReference: {fileID: 0}
     - target: {fileID: 61347684763487762, guid: 47eb07b19a1942241ba3f9215b69c642,
         type: 2}
       propertyPath: m_Size.x
-      value: 0.08153322
+      value: 0.13826211
       objectReference: {fileID: 0}
     - target: {fileID: 61338649270503888, guid: 47eb07b19a1942241ba3f9215b69c642,
         type: 2}
