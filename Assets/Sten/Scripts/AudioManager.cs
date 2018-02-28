@@ -23,6 +23,10 @@ public class AudioManager : MonoBehaviour {
     //Interaction sounds. Pick up something, break something, stab something etc. all as a consequence to the X button
     [SerializeField]
     private AudioSource interactionSounds;
+    [SerializeField]
+    private AudioSource SFX2;
+    [SerializeField]
+    private AudioSource SFX3;
     //Transition sound
     [SerializeField]
     private AudioSource transitionSoundSource;
@@ -105,24 +109,67 @@ public class AudioManager : MonoBehaviour {
 
         interactionSounds.clip = interactionSoundsList[(int)sound];
         interactionSounds.Play();
-        /*
+
+        // Check if this audiosource is available
         if (!interactionSounds.isPlaying) {
             interactionSounds.clip = interactionSoundsList[(int)sound];
             interactionSounds.Play();
         }
+        else if (!SFX2.isPlaying)
+        {
+            SFX2.clip = interactionSoundsList[(int)sound];
+            SFX2.Play();
+        }
+        else if (!SFX3.isPlaying)
+        {
+            SFX3.clip = interactionSoundsList[(int)sound];
+            SFX3.Play();
+        }
         else {
             StartCoroutine(waitForInteractionSound(sound));
         }
-        */
+        
         return interactionSounds;
     }
-    /*
+
+    // Second AudioSource for interaction sounds
+    public AudioSource interactionSound2(interactionSounds sound)
+    {
+        SFX2.clip = interactionSoundsList[(int)sound];
+        SFX2.Play();
+
+        // Check if this audiosource is available
+        if (!SFX2.isPlaying)
+        {
+            SFX2.clip = interactionSoundsList[(int)sound];
+            SFX2.Play();
+        }
+
+        return SFX2;
+    }
+
+    // Third AudioSource for interaction sounds
+    public AudioSource interactionSound3(interactionSounds sound)
+    {
+        SFX3.clip = interactionSoundsList[(int)sound];
+        SFX3.Play();
+
+        // Check if this audiosource is available
+        if (!SFX3.isPlaying)
+        {
+            SFX3.clip = interactionSoundsList[(int)sound];
+            SFX3.Play();
+        }
+
+        return SFX3;
+    }
+
     IEnumerator waitForInteractionSound(interactionSounds sound) {
         yield return new WaitWhile(() => interactionSounds.isPlaying);
         interactionSounds.clip = interactionSoundsList[(int)sound];
         interactionSounds.Play();
     }
-    */
+    
 
     public AudioSource playTransitionSound() {
         transitionSoundSource.Play();

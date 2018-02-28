@@ -39920,6 +39920,8 @@ MonoBehaviour:
   environmentalSounds: {fileID: 1365160178}
   uiSounds: {fileID: 1365160177}
   interactionSounds: {fileID: 1365160176}
+  SFX2: {fileID: 0}
+  SFX3: {fileID: 0}
   transitionSoundSource: {fileID: 1365160176}
   musicList:
   - {fileID: 8300000, guid: f6cab059b43f7bc4094a6cec4061624a, type: 3}
