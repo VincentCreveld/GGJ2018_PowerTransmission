@@ -34,9 +34,9 @@ public class LeverScript : MonoBehaviour, IInteractable {
         isActive = true;
         if (!isButton) {
             MoveObject();
-
+            audioManager.interactionSound(interactionSounds.switch1);
         }
-	}
+    }
 
     public void OnTriggerEnter2D(Collider2D col) {
         if (isButton) {

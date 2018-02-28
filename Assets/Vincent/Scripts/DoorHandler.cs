@@ -18,7 +18,33 @@ public class DoorHandler : MonoBehaviour {
 		if(doorP1.playerPresent && doorP2.playerPresent) {
 			doorP1.playerCanProceed = true;
 			doorP2.playerCanProceed = true;
-		}
+
+            switch (LevelManager.instance.currentLevel)
+            {
+                case 0:
+                    audioManager.interactionSound(interactionSounds.deur1);
+                    break;
+
+                case 1:
+                    audioManager.interactionSound(interactionSounds.deur2);
+                    break;
+
+                case 2:
+                    audioManager.interactionSound(interactionSounds.deur3);
+                    break;
+
+                case 3:
+                    audioManager.interactionSound(interactionSounds.deur4);
+                    break;
+
+                case 4:
+                    audioManager.interactionSound(interactionSounds.deur5);
+                    break;
+
+                default:
+                    break;
+            }
+        }
 		else {
 			doorP1.playerCanProceed = false;
 			doorP2.playerCanProceed = false;

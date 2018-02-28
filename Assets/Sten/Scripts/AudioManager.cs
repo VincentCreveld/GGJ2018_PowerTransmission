@@ -7,7 +7,7 @@ public enum environmentalSound { ambience = 0 };
 public enum uiSounds { cameraSwitch1 = 0, cameraSwitch2  };
 public enum interactionSounds { chopTree1 = 0, chopTree2, pushBox, fallBox, grow1, grow2, grow3, enterLever, exitLever,
                                 dropSword1, dropSword2, pickUp, shrink1, shrink2, shrink3, switch1, deur1, deur2, deur3,
-                                deur4, deur5 };
+                                deur4, deur5, stairs, key, attack1, attack2, attack3 };
 
 public class AudioManager : MonoBehaviour {
 

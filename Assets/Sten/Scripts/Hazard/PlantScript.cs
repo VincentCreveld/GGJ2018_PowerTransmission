@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlantScript : MonoBehaviour {
 
+
     [SerializeField]
     private Sprite plantAlive;
     [SerializeField]
@@ -15,8 +16,15 @@ public class PlantScript : MonoBehaviour {
 
     private bool isAlive = true;
 
+    private AudioManager audioManager;
 
-	public void OnCollisionEnter2D(Collision2D col) {
+    private void Start()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+
+
+    public void OnCollisionEnter2D(Collision2D col) {
         if(col.gameObject.GetComponent<PlayerManager>() != null) {
                 EventManager.instance.playerDeath();
         }else {
@@ -29,6 +37,10 @@ public class PlantScript : MonoBehaviour {
     IEnumerator DiePlant() {
         Debug.Log("Plant dying");
         isAlive = false;
+
+        int random = Random.Range(0, 3);
+
+
         Destroy(this.GetComponent<Animator>());
         this.gameObject.GetComponent<Collider2D>().enabled = false;
         this.GetComponent<SpriteRenderer>().sprite = plantDeath1;

@@ -205,7 +205,10 @@ public class PlayerManager : MonoBehaviour {
 		if(climbable) {
 			charAnimation.SetBool("PlayerWalk", false);
 			if(!grounded)
-				rigidBody2D.velocity = new Vector2(moveHorizontal * speed / 3, moveVertical * speed);
+            {
+                rigidBody2D.velocity = new Vector2(moveHorizontal * speed / 3, moveVertical * speed);
+                audioManager.interactionSound(interactionSounds.stairs);
+            }
 			else
 				rigidBody2D.velocity = new Vector2(moveHorizontal * speed, moveVertical * speed);
 		}
