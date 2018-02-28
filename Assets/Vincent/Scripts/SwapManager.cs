@@ -47,6 +47,17 @@ public class SwapManager : MonoBehaviour {
         p2StartPos = LevelManager.instance.SetPlayer2Pos();
     }
 
+	private void Update() {
+		if(pickedUpObj != null) {
+			if(p1IsHolding) {
+				float scaleX = -player1.graphicsSlot.localScale.x;
+				pickedUpObj.transform.localScale = new Vector3(scaleX * 10, pickedUpObj.transform.parent.localScale.y * 10, 1);
+			}else if(!p1IsHolding) {
+				float scaleX = -player2.graphicsSlot.localScale.x;
+				pickedUpObj.transform.localScale = new Vector3(scaleX * 10, pickedUpObj.transform.parent.localScale.y * 10, 1);
+			}
+		}
+	}
 
 	private void SetupPlayerManagers() {
         if (objPlayer1.GetComponent<PlayerManager>() == null) {
