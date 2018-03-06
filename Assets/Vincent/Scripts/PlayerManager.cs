@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviour {
 
 	private Rigidbody2D rigidBody2D;
 	private bool grounded = true;
-	private float groundRadius = 0.2f;
+	private float groundRadius = 0.1f;
 	private float gravityScale;
 
 	private float moveVertical;
@@ -350,6 +350,7 @@ public class PlayerManager : MonoBehaviour {
 				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE/2, SMALL_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, SMALL_SIZE / -2);
+                groundRadius = 0.01f;
 
                 break;
 			case BlockSize.medium:
@@ -357,6 +358,7 @@ public class PlayerManager : MonoBehaviour {
 				graphicsSlot.localScale = new Vector3(SMALL_SIZE, SMALL_SIZE, SMALL_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(SMALL_SIZE / 2, SMALL_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, SMALL_SIZE / -2);
+                groundRadius = 0.1f;
 
                 if (random == 0)
                     audioManager.interactionSound(interactionSounds.shrink1);
@@ -371,6 +373,7 @@ public class PlayerManager : MonoBehaviour {
 				graphicsSlot.localScale = new Vector3(MEDIUM_SIZE, MEDIUM_SIZE, MEDIUM_SIZE);
 				GetComponent<BoxCollider2D>().size = new Vector2(MEDIUM_SIZE/2, MEDIUM_SIZE * 1.2f);
 				groundCheck.transform.localPosition = new Vector2(0, MEDIUM_SIZE / -2);
+                groundRadius = 0.1f;
 
                 if (random == 0)
                     audioManager.interactionSound(interactionSounds.shrink1);
