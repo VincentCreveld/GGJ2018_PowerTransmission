@@ -61,7 +61,7 @@ public class PlayerManager : MonoBehaviour {
 
 	#region Variabele Celine player manager
 	public float speed = 3.5f;
-	public float jumpForce = 6.5f;
+	public float jumpForce = 8;
 
 	public Transform groundCheck;
 	private LayerMask whatIsGround;

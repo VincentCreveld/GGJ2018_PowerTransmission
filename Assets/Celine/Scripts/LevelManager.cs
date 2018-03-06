@@ -78,6 +78,7 @@ public class LevelManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene(0);
+            Destroy(this.gameObject);
         }
     }
 
@@ -133,7 +134,7 @@ public class LevelManager : MonoBehaviour
         return startPosPlayer2;
     }
     private IEnumerator _ResetLevel() {
-        asyncLoadLevel = SceneManager.LoadSceneAsync("Prototype2Art", LoadSceneMode.Single);
+        asyncLoadLevel = SceneManager.LoadSceneAsync("Prototype2Art2.0", LoadSceneMode.Single);
         while (!asyncLoadLevel.isDone) {
             print("Loading the Scene");
             yield return null;
