@@ -69,14 +69,12 @@ public class LeverScript : MonoBehaviour, IInteractable {
 	private void MoveObject() {
         if (objectToMove.position == endPos.position) {
             isAtEnd = true;
-            Debug.Log("At end");
             this.GetComponent<SpriteRenderer>().sprite = idleState;
             this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
             if (objectToMove.gameObject.GetComponent<AudioSource>())
                 objectToMove.gameObject.GetComponent<AudioSource>().Play();
             }
         else { isAtEnd = false;
-            Debug.Log("To begin");
             this.GetComponent<SpriteRenderer>().sprite = interactedState;
             this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
             if(objectToMove.gameObject.GetComponent<AudioSource>())

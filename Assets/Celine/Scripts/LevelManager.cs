@@ -77,8 +77,7 @@ public class LevelManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            LevelUp();
-            Debug.Log("Move up!");
+            SceneManager.LoadScene(0);
         }
     }
 
