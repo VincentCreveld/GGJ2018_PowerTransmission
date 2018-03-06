@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Sten/Prototype2.unity
     guid: 9ad23df7af894504cb14b6c781cf0ef1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Bauke/Scenes/Prototype2Art.unity
     guid: e0ff9cb714ab4274d8ea00940619a231
+  - enabled: 1
+    path: Assets/Bauke/Scenes/Prototype2Art2.0.unity
+    guid: 354fe57eba8b9ae4c8a370acda293b70
