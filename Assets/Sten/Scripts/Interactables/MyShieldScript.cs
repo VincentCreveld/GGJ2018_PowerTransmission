@@ -7,7 +7,7 @@ public class MyShieldScript : MonoBehaviour, IInteractable {
     private AudioManager audioManager;
     private Vector3 initialPos;
 
-    private void Start() {
+    private void Init() {
         audioManager = FindObjectOfType<AudioManager>();
         initialPos = transform.position;
         EventManager.instance.playerDeath += ResetInteractable;
@@ -25,6 +25,7 @@ public class MyShieldScript : MonoBehaviour, IInteractable {
     }
 
     public void Act(Transform playerPos) {
+        Init();
         Debug.Log("Picked up shield!");
         playerPos.gameObject.GetComponent<PlayerManager>().hasItem = true;
         this.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;

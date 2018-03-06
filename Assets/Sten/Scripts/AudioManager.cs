@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum musicTrack { gameSound = 0 };
 public enum environmentalSound { ambience = 0 };
-public enum uiSounds { cameraSwitch1 = 0, cameraSwitch2  };
+public enum uiSounds { cameraSwitch1 = 0, cameraSwitch2, jump, growshrink,interact };
 public enum interactionSounds { chopTree1 = 0, chopTree2, pushBox, fallBox, grow1, grow2, grow3, enterLever, exitLever,
                                 dropSword1, dropSword2, pickUp, shrink1, shrink2, shrink3, switch1, deur1, deur2, deur3,
-                                deur4, deur5, stairs, key, attack1, attack2, attack3 };
+                                deur4, deur5, stairs, key, attack1, attack2, attack3, moveWall, plantAttack1, plantAttack2, plantAttack3 };
 
 public class AudioManager : MonoBehaviour {
 
@@ -20,6 +20,10 @@ public class AudioManager : MonoBehaviour {
     //Extra gamewide sounds used mainly in combination with the UI
     [SerializeField]
     private AudioSource uiSounds;
+    [SerializeField]
+    private AudioSource uiSounds2;
+    [SerializeField]
+    private AudioSource uiSounds3;
     //Interaction sounds. Pick up something, break something, stab something etc. all as a consequence to the X button
     [SerializeField]
     private AudioSource interactionSounds;
@@ -91,13 +95,28 @@ public class AudioManager : MonoBehaviour {
         if (!uiSounds.isPlaying) {
             uiSounds.clip = uiList[(int)sound];
             uiSounds.Play();
-
         }
-        else {
-            StartCoroutine(waitForUITrack(sound));
-        }
+        else if(!uiSounds2.isPlaying) {
+            uiSoundTrack2(sound);
+            }
+        else { uiSoundTrack3(sound); }
         return uiSounds;
     }
+    public AudioSource uiSoundTrack2(uiSounds sound) {
+        if (!uiSounds2.isPlaying) {
+            uiSounds2.clip = uiList[(int)sound];
+            uiSounds2.Play();
+
+            }
+        return uiSounds;
+        }
+    public AudioSource uiSoundTrack3(uiSounds sound) {
+        if (!uiSounds3.isPlaying) {
+            uiSounds3.clip = uiList[(int)sound];
+            uiSounds3.Play();
+            }
+        return uiSounds;
+        }
     IEnumerator waitForUITrack(uiSounds sound) {
         yield return new WaitWhile(() => uiSounds.isPlaying);
         uiSounds.clip = uiList[(int)sound];
@@ -126,7 +145,8 @@ public class AudioManager : MonoBehaviour {
             SFX3.Play();
         }
         else {
-            StartCoroutine(waitForInteractionSound(sound));
+            //StartCoroutine(waitForInteractionSound(sound));
+            Debug.Log("too many sounds at once");
         }
         
         return interactionSounds;

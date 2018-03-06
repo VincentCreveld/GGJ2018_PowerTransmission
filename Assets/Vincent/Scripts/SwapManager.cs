@@ -53,10 +53,10 @@ public class SwapManager : MonoBehaviour {
 		if(pickedUpObj != null) {
 			if(p1IsHolding) {
 				float scaleX = -player1.graphicsSlot.localScale.x;
-				pickedUpObj.transform.localScale = new Vector3(scaleX * 10, pickedUpObj.transform.parent.localScale.y * 10, 1);
+				//pickedUpObj.transform.localScale = new Vector3(scaleX * 10, pickedUpObj.transform.parent.localScale.y * 10, 1);
 			}else if(!p1IsHolding) {
 				float scaleX = -player2.graphicsSlot.localScale.x;
-				pickedUpObj.transform.localScale = new Vector3(scaleX * 10, pickedUpObj.transform.parent.localScale.y * 10, 1);
+				//pickedUpObj.transform.localScale = new Vector3(scaleX * 10, pickedUpObj.transform.parent.localScale.y * 10, 1);
 			}
 		}
 	}
@@ -94,14 +94,17 @@ public class SwapManager : MonoBehaviour {
 	//These functions are called with input to notify the SwapManager to switch over the controls.
 	public void A_Swap() {
 		A_ButtonTransmission();
+        LevelManager.instance.audioManager.uiSoundTrack(uiSounds.jump);
 	}
 	public void B_Swap() {
 		B_ButtonTransmission();
-	}
+        LevelManager.instance.audioManager.uiSoundTrack(uiSounds.growshrink);
+        }
 	public void X_Swap() {
 		X_ButtonTransmission();
 		SwapWeapon();
-	}
+        LevelManager.instance.audioManager.uiSoundTrack(uiSounds.interact);
+        }
 	public void Y_Swap() {
 		Y_ButtonTransmission();
 	}
@@ -112,11 +115,12 @@ public class SwapManager : MonoBehaviour {
 		if(p1IsHolding) {
 			pickedUpObj.parent = player1.pickupSlot;
 			pickedUpObj.transform.localPosition = Vector3.zero;
+
 		}
 		else {
 			pickedUpObj.parent = player2.pickupSlot;
 			pickedUpObj.transform.localPosition = Vector3.zero;
-		}
+            }
 	}
 
 	public void DropWeapon() {

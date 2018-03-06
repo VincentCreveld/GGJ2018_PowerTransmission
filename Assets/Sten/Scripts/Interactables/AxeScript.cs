@@ -8,7 +8,7 @@ public class AxeScript : MonoBehaviour, IInteractable {
 
     private Vector3 initialPos;
 
-    private void Start() {
+    private void Init() {
         audioManager = FindObjectOfType<AudioManager>();
 
         initialPos = transform.position;
@@ -29,6 +29,7 @@ public class AxeScript : MonoBehaviour, IInteractable {
     }
 
     public void Act(Transform playerPos) {
+        Init();
         Debug.Log("Picked up Axe!");
         playerPos.gameObject.GetComponent<PlayerManager>().hasItem = true;
         this.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;

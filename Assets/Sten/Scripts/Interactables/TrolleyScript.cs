@@ -27,6 +27,9 @@ public class TrolleyScript : MonoBehaviour {
         if(col.GetComponent<Box>() != null) {
             //do it
             isMoving = true;
+            if (platformUp.gameObject.GetComponent<AudioSource>()) {
+                platformUp.gameObject.GetComponent<AudioSource>().Play();
+                }
         }
     }
 

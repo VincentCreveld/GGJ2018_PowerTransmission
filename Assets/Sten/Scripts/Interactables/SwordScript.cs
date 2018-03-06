@@ -6,7 +6,7 @@ public class SwordScript : MonoBehaviour, IInteractable {
     private AudioManager audioManager;
     private Vector3 initialPos;
 
-	private void Start() {
+	private void Init() {
 		initialPos = transform.position;
 		EventManager.instance.playerDeath += ResetInteractable;
         audioManager = FindObjectOfType<AudioManager>();
@@ -25,6 +25,7 @@ public class SwordScript : MonoBehaviour, IInteractable {
     }
 
 	public void Act (Transform playerPos) {
+        Init();
         Debug.Log("Picked up sword!");
         playerPos.gameObject.GetComponent<PlayerManager>().hasItem = true;
 
@@ -34,5 +35,12 @@ public class SwordScript : MonoBehaviour, IInteractable {
         playerPos.GetComponent<PlayerManager>().swapManager.PickupWeapon(transform);
         audioManager.interactionSound(interactionSounds.pickUp);
     }
+    public void Drop() {
+        int random = Random.Range(0, 2);
+        if (random == 0)
+            audioManager.interactionSound(interactionSounds.dropSword1);
+        else if (random == 1)
+            audioManager.interactionSound(interactionSounds.dropSword2);
+        }
 	
 }

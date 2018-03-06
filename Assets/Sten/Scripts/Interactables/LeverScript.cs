@@ -61,7 +61,8 @@ public class LeverScript : MonoBehaviour, IInteractable {
         float step = moveSpeed * Time.deltaTime;
         if (!isAtEnd && isActive) {
             objectToMove.transform.position = Vector3.MoveTowards(objectToMove.position, endPos.position, step);
-        }else { objectToMove.transform.position = Vector3.MoveTowards(objectToMove.position, startPos.position, step); }
+        }else { objectToMove.transform.position = Vector3.MoveTowards(objectToMove.position, startPos.position, step);
+                        }
     }
 	// Update is called once per frame
     
@@ -71,12 +72,16 @@ public class LeverScript : MonoBehaviour, IInteractable {
             Debug.Log("At end");
             this.GetComponent<SpriteRenderer>().sprite = idleState;
             this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
-        }
+            if (objectToMove.gameObject.GetComponent<AudioSource>())
+                objectToMove.gameObject.GetComponent<AudioSource>().Play();
+            }
         else { isAtEnd = false;
             Debug.Log("To begin");
             this.GetComponent<SpriteRenderer>().sprite = interactedState;
             this.GetComponent<SpriteRenderer>().sprite.texture.Apply();
-        }    
+            if(objectToMove.gameObject.GetComponent<AudioSource>())
+            objectToMove.gameObject.GetComponent<AudioSource>().Play();
+            }    
         }
 	}
 

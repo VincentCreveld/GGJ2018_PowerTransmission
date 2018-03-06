@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     AsyncOperation asyncLoadLevel;
 
     private MoveCamera moveCamera;
-    private AudioManager audioManager;
+    public AudioManager audioManager;
 
     public int level = 1;
     public int currentLevel;

@@ -440,7 +440,7 @@ public class PlayerManager : MonoBehaviour {
 	public void DropItem() {
 		hasItem = false;
 		swapManager.DropWeapon();
-	}
+        }
 	#endregion
 
 	private void SubscribeFunctionality() {

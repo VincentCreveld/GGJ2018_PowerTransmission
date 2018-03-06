@@ -16,7 +16,7 @@ public class LavaScript : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left, raycastDistance);
         if (hit.collider != null) {
             if (hit.collider.gameObject.GetComponent<MyShieldScript>() != null) {
-                Debug.Log("Shielded");
+                //Debug.Log("Shielded");
                 lavaSmall.SetActive(true);
                 lavaBig.SetActive(false);
                 lavaBig.GetComponent<Animator>().enabled = false;

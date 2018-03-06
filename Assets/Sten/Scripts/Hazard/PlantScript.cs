@@ -26,9 +26,25 @@ public class PlantScript : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D col) {
         if(col.gameObject.GetComponent<PlayerManager>() != null) {
-                EventManager.instance.playerDeath();
+            //plant attack sound
+            int random = Random.Range(0, 3);
+            if (random == 0)
+                audioManager.interactionSound(interactionSounds.plantAttack1);
+            if (random == 1)
+                audioManager.interactionSound(interactionSounds.plantAttack2);
+            if (random == 2)
+                audioManager.interactionSound(interactionSounds.plantAttack3);
+            EventManager.instance.playerDeath();
         }else {
             if (col.gameObject.GetComponent<SwordScript>() != null && isAlive) {
+                //plant die sound
+                int random = Random.Range(0, 3);
+                if(random == 0) 
+                    audioManager.interactionSound(interactionSounds.attack1);
+                if(random == 1)
+                    audioManager.interactionSound(interactionSounds.attack2);
+                if (random == 2)
+                    audioManager.interactionSound(interactionSounds.attack3);
                 StartCoroutine(DiePlant());
             }
         }
